@@ -1,0 +1,46 @@
+{
+  "name": "CCLRequestReplay",
+  "version": "0.9.0",
+  "license": "BSD",
+  "summary": "Powerful library to replay HTTP responses",
+  "homepage": "https://github.com/cocodelabs/CCLRequestReplay",
+  "authors": {
+    "Kyle Fuller": "inbox@kylefuller.co.uk"
+  },
+  "social_media_url": "https://twitter.com/kylefuller",
+  "source": {
+    "git": "https://github.com/neonichu/CCLRequestReplay.git",
+    "tag": "0.9.0"
+  },
+  "requires_arc": true,
+  "platforms": {
+    "osx": "10.7",
+    "ios": "5.0"
+  },
+  "header_dir": "CCLRequestReplay",
+  "subspecs": [
+    {
+      "name": "Manager",
+      "source_files": [
+        "CCLRequestReplay/CCLRequestReplayManager.{h,m}",
+        "CCLRequestReplay/CCLRequestRecording.{h,m}"
+      ]
+    },
+    {
+      "name": "Replay",
+      "source_files": "CCLRequestReplay/CCLRequestReplayProtocol.{h,m}"
+    },
+    {
+      "name": "Record",
+      "source_files": "CCLRequestReplay/CCLRequestRecordProtocol.{h,m}"
+    },
+    {
+      "name": "Blueprint",
+      "source_files": "CCLRequestReplay/CCLRequestReplayManager+Blueprint.{h,m}"
+    },
+    {
+      "name": "JSON",
+      "source_files": "CCLRequestReplay/CCLRequestJSONRecording.{h,m}"
+    }
+  ]
+}

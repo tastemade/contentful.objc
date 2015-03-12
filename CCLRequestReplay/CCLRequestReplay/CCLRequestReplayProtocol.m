@@ -10,8 +10,6 @@
 #import "CCLRequestRecording.h"
 
 
-extern NSInteger CCLSequenceNumber;
-
 @implementation CCLRequestReplayProtocol
 
 static NSMutableSet *_managers;
@@ -59,10 +57,6 @@ static NSMutableSet *_managers;
 - (void)startLoading {
     id<CCLRequestRecordingProtocol> recording = [[self class] recordingForRequest:[self request]];
 
-    if (!recording) {
-        return;
-    }
-
     NSError *error = [recording errorForRequest:[self request]];
 
     if (error) {
@@ -79,8 +73,6 @@ static NSMutableSet *_managers;
 
         [[self client] URLProtocolDidFinishLoading:self];
     }
-
-    CCLSequenceNumber++;
 }
 
 - (void)stopLoading {

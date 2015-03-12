@@ -9,8 +9,6 @@
 #import "CCLRequestRecording.h"
 
 
-extern NSInteger CCLSequenceNumber;
-
 @implementation CCLRequestRecording
 
 - (instancetype)initWithRequest:(NSURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data {
@@ -79,12 +77,6 @@ extern NSInteger CCLSequenceNumber;
     if (self.matcher) {
         return self.matcher(request);
     }
-
-    NSString* sequenceNumber = [self.request valueForHTTPHeaderField:@"CCLSequenceNumber"];
-    if (sequenceNumber && sequenceNumber.integerValue != CCLSequenceNumber) {
-        return NO;
-    }
-
     return [[[self request] URL] isEqual:[request URL]] && [[[self request] HTTPMethod] isEqualToString:[request HTTPMethod]];
 }
 
