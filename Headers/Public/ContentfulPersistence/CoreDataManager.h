@@ -1,0 +1,1 @@
+../../../ContentfulPersistence/Code/CoreDataManager.h
