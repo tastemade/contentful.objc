@@ -6,11 +6,12 @@
 //
 //
 
+#import "CDAGenericsStubs.h"
 #import "CDAInputSanitizer.h"
 
 @implementation CDAInputSanitizer
 
-+(NSArray*)sanitizeArray:(NSArray*)array {
++(CDA_GENERICS(NSArray, id)*)sanitizeArray:(CDA_GENERICS(NSArray, id)*)array {
     NSMutableArray* result = [array mutableCopy];
     
     [result removeObject:[NSNull null]];

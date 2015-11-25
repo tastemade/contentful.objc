@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return An array of Field identifiers as strings. Any identifiers which do not match actual
  *      Fields on the Entry will be ignored.
  */
-@property (nonatomic, readonly) NSArray* __nullable visibleFields;
+@property (nonatomic, readonly) CDA_GENERICS(NSArray, NSString*)* __nullable visibleFields;
 
 /** @name Initializing the CDAEntriesViewController Object */
 

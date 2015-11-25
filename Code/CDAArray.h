@@ -6,18 +6,20 @@
 //
 //
 
+#import <ContentfulDeliveryAPI/CDAError.h>
+#import <ContentfulDeliveryAPI/CDAGenericsStubs.h>
 #import <ContentfulDeliveryAPI/CDANullabilityStubs.h>
 #import <ContentfulDeliveryAPI/CDAResource.h>
 
 /**
  A list of resources which was retrieved from the server.
  */
-@interface CDAArray : CDAResource
+@interface CDA_GENERICS(CDAArray, __covariant ObjectType) : CDAResource
 
 /** @name Accessing Local Data */
 
 /** A list of items available locally. */
-@property (nonatomic, readonly) NSArray* __nonnull items;
+@property (nonatomic, readonly) CDA_GENERICS(NSArray, ObjectType)* __nonnull items;
 
 /** @name Information about Remote Data */
 
@@ -36,6 +38,6 @@
  *  For example, if there is a link to an Entry which no longer exists, there will be a `notResolvable`
  *  error in the `errors` array.
  */
-@property (nonatomic, readonly) NSArray* __nonnull errors;
+@property (nonatomic, readonly) CDA_GENERICS(NSArray, CDAError*)* __nonnull errors;
 
 @end

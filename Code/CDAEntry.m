@@ -35,9 +35,9 @@
     return @"Entry";
 }
 
-+(NSArray*)subclasses {
++(CDA_GENERICS(NSArray, Class)*)subclasses {
     static dispatch_once_t once;
-    static NSArray* subclasses;
+    static CDA_GENERICS(NSArray, Class)* subclasses;
     dispatch_once(&once, ^ { subclasses = CDAClassGetSubclasses([self class]); });
     return subclasses;
 }
@@ -79,8 +79,8 @@
     return localizedFields ?: @{};
 }
 
--(NSArray*)findUnresolvedResourceOfClass:(Class)class {
-    __block NSMutableArray* unresolvedResources = [@[] mutableCopy];
+-(CDA_GENERICS(NSArray, __kindof CDAResource*)*)findUnresolvedResourceOfClass:(Class)class {
+    __block CDA_GENERICS(NSMutableArray, CDAResource*)* unresolvedResources = [@[] mutableCopy];
     
     [self resolveLinksWithIncludedAssets:nil entries:nil usingBlock:^CDAResource *(CDAResource *resource, NSDictionary *assets, NSDictionary *entries) {
         if (CDAClassIsOfType([resource class], class) && !resource.fetched) {
@@ -195,10 +195,10 @@
         CDAField* field = [self.contentType fieldForIdentifier:key];
         
         if (field.type == CDAFieldTypeArray && [value isKindOfClass:[NSArray class]]) {
-            NSArray* array = value;
+            CDA_GENERICS(NSArray, id)* array = value;
             
             if (array.count > 0 && CDAClassIsOfType([[array firstObject] class], CDAResource.class)) {
-                NSMutableArray* newArray = [@[] mutableCopy];
+                CDA_GENERICS(NSMutableArray, CDAResource*)* newArray = [@[] mutableCopy];
                 
                 for (CDAResource* resource in array) {
                     CDAResource* possibleResource = resolver(resource, assets, entries);

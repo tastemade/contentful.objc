@@ -43,7 +43,7 @@
 @property (nonatomic, weak) CDAClient* __nullable client;
 
 /** The items which are currently displayed in this view controller's table view. */
-@property (nonatomic, readonly) NSArray* __nullable items;
+@property (nonatomic, readonly) CDA_GENERICS(NSArray, __kindof CDAResource*)* __nullable items;
 
 /**
  The query parameters used for fetching Entries. By default, all Entries from the Space associated

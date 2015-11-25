@@ -6,6 +6,7 @@
 //
 //
 
+#import <ContentfulDeliveryAPI/CDAGenericsStubs.h>
 #import <ContentfulDeliveryAPI/CDANullabilityStubs.h>
 #import <ContentfulDeliveryAPI/CDAResource.h>
 
@@ -24,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** @name Accessing Fields */
 
 /** List of all fields as an array of `CDAField` objects. */
-@property (nonatomic, readonly) NSArray* fields;
+@property (nonatomic, readonly) CDA_GENERICS(NSArray, CDAField*)* fields;
 
 /**
  Retrieve a specific field by its identifier.

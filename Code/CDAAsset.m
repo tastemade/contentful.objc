@@ -8,6 +8,7 @@
 
 #import "CDAAsset+Private.h"
 #import "CDAClient+Private.h"
+#import "CDAGenericsStubs.h"
 #import "CDAInputSanitizer.h"
 #import "CDAResource+Private.h"
 #import "CDASpace+Private.h"
@@ -75,9 +76,9 @@ const CGFloat CDARadiusNone             = 0.0;
     return @"Asset";
 }
 
-+(NSArray*)subclasses {
++(CDA_GENERICS(NSArray, Class)*)subclasses {
     static dispatch_once_t once;
-    static NSArray* subclasses;
+    static CDA_GENERICS(NSArray, Class)* subclasses;
     dispatch_once(&once, ^ { subclasses = CDAClassGetSubclasses([self class]); });
     return subclasses;
 }

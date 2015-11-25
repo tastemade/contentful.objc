@@ -16,7 +16,7 @@
 
 @property (nonatomic) NSDictionary* allFields;
 @property (nonatomic) NSString* displayField;
-@property (nonatomic) NSArray* fields;
+@property (nonatomic) CDA_GENERICS(NSArray, CDAField*)* fields;
 @property (nonatomic) NSString* name;
 @property (nonatomic) NSString* userDescription;
 

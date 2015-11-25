@@ -8,6 +8,7 @@
 
 @import Foundation;
 
+#import <ContentfulDeliveryAPI/CDAGenericsStubs.h>
 #import <ContentfulDeliveryAPI/CDANullabilityStubs.h>
 
 @class CDAArray;
@@ -17,6 +18,7 @@
 @class CDAEntry;
 @class CDAResponse;
 @class CDARequest;
+@class CDAResource;
 @class CDASpace;
 @class CDASyncedSpace;
 
@@ -217,7 +219,7 @@ typedef void(^CDASyncedSpaceFetchedBlock)(CDAResponse* response, CDASyncedSpace*
  *  @param failure A block which gets called if an error occured during the retrieval process.
  */
 -(void)fetchAllItemsFromArray:(CDAArray*)array
-                      success:(void (^)(NSArray* items))success
+                      success:(void (^)(CDA_GENERICS(NSArray, __kindof CDAResource*)* items))success
                       failure:(CDARequestFailureBlock __nullable)failure;
 
 /** @name Synchronization */
@@ -303,8 +305,8 @@ typedef void(^CDASyncedSpaceFetchedBlock)(CDAResponse* response, CDASyncedSpace*
  *  @param success A block which gets called upon successful retrieval of all Resources.
  *  @param failure A block which gets called if an error occured during the retrieval process.
  */
--(void)resolveLinksFromArray:(NSArray*)array
-                     success:(void (^)(NSArray* items))success
+-(void)resolveLinksFromArray:(CDA_GENERICS(NSArray, __kindof CDAResource*)*)array
+                     success:(void (^)(CDA_GENERICS(NSArray, __kindof CDAResource*)* items))success
                      failure:(CDARequestFailureBlock __nullable)failure;
 
 @end

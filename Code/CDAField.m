@@ -122,7 +122,8 @@
 }
 
 -(NSString*)fieldTypeToString:(CDAFieldType)fieldType {
-    NSArray* possibleFieldTypes = [self.fieldTypes allKeysForObject:@(fieldType)];
+    CDA_GENERICS(NSArray, NSString*)* possibleFieldTypes = [self.fieldTypes
+                                                            allKeysForObject:@(fieldType)];
     NSAssert(possibleFieldTypes.count == 1,
              @"Field-type %ld lacks proper string representation.", (long)fieldType);
     return possibleFieldTypes[0];

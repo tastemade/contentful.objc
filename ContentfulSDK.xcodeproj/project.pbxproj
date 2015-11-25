@@ -12,6 +12,7 @@
 		69542C72475B4BE9B13D2B9D /* libPods-ContentfulSeedDatabase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A95F13622EB14F0E953B6A82 /* libPods-ContentfulSeedDatabase.a */; };
 		7831960E0E0E4914B8E3441C /* libPods-UFO Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C0CBBA8A43044059BA56429 /* libPods-UFO Example.a */; };
 		A10A11FE19090F5D00EFF083 /* CatDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10A11FD19090F5D00EFF083 /* CatDetailViewController.m */; };
+		A10B0CBF1C05EA44006692D2 /* CDAGenericsStubs.h in Headers */ = {isa = PBXBuildFile; fileRef = A14050501C05E7A5000D3D2B /* CDAGenericsStubs.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A12085771BB2707300A6504B /* CDALocalizablePersistedEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A12085751BB2707300A6504B /* CDALocalizablePersistedEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A12085781BB2707300A6504B /* CDALocalizablePersistedEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = A12085761BB2707300A6504B /* CDALocalizablePersistedEntry.m */; };
 		A120857B1BB2712300A6504B /* ManagedCatLocalized.m in Sources */ = {isa = PBXBuildFile; fileRef = A120857A1BB2712300A6504B /* ManagedCatLocalized.m */; };
@@ -302,6 +303,7 @@
 		A12797AD18E1B10300043A44 /* CDASyncedSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDASyncedSpace.m; sourceTree = "<group>"; };
 		A12F19DD1BB48F190088C199 /* CoreDataMultipleLocalesTests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = CoreDataMultipleLocalesTests.json; path = Data/Recordings/CoreDataMultipleLocalesTests.json; sourceTree = "<group>"; };
 		A12F19DF1BB48F380088C199 /* ComplexSyncTests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ComplexSyncTests.json; path = Data/Recordings/ComplexSyncTests.json; sourceTree = "<group>"; };
+		A14050501C05E7A5000D3D2B /* CDAGenericsStubs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDAGenericsStubs.h; sourceTree = "<group>"; };
 		A144FAF518C90DD100110B35 /* StagingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StagingTests.m; sourceTree = "<group>"; };
 		A144FAFB18C9F8C200110B35 /* StagingTests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = StagingTests.json; path = Data/Recordings/StagingTests.json; sourceTree = "<group>"; };
 		A144FAFD18C9F8CA00110B35 /* SearchAPITests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SearchAPITests.json; path = Data/Recordings/SearchAPITests.json; sourceTree = "<group>"; };
@@ -764,6 +766,7 @@
 			children = (
 				A18AA85F18E5D63B00D430D5 /* CDAFallbackDictionary.h */,
 				A18AA86018E5D63B00D430D5 /* CDAFallbackDictionary.m */,
+				A14050501C05E7A5000D3D2B /* CDAGenericsStubs.h */,
 				A17CC3D61ADE5F2700C7AA57 /* CDANullabilityStubs.h */,
 				A1A0313D18C66667006470B7 /* CDAUtilities.h */,
 				A1A0313E18C66667006470B7 /* CDAUtilities.m */,
@@ -1291,6 +1294,7 @@
 				A173F59518D9A269000E6F92 /* CDAResourcesCollectionViewController.h in Headers */,
 				A1B815CC18F5A8250027B26D /* CDAEntry+Private.h in Headers */,
 				A1E9797B18CC683200E79632 /* CDAFieldValueTransformer.h in Headers */,
+				A10B0CBF1C05EA44006692D2 /* CDAGenericsStubs.h in Headers */,
 				A17012F618FC1FF80086BE07 /* CDAPersistedAsset.h in Headers */,
 				A1924C9118EC0DF000C97F9D /* CDAMapViewController.h in Headers */,
 				A1D2DC0218D076F50053DC83 /* CDAEntriesViewController.h in Headers */,

@@ -10,8 +10,8 @@
 
 @interface CDAEntry ()
 
--(NSArray*)findUnresolvedAssets;
--(NSArray*)findUnresolvedEntries;
+-(CDA_GENERICS(NSArray, CDAAsset*)*)findUnresolvedAssets;
+-(CDA_GENERICS(NSArray, CDAEntry*)*)findUnresolvedEntries;
 -(NSDictionary*)localizedFields;
 -(void)resolveLinksWithIncludedAssets:(NSDictionary*)assets
                               entries:(NSDictionary*)entries

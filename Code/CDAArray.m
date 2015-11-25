@@ -11,10 +11,10 @@
 #import "CDAResource+Private.h"
 #import "CDAUtilities.h"
 
-@interface CDAArray ()
+@interface CDA_GENERICS(CDAArray, __covariant ObjectType) ()
 
-@property (nonatomic) NSArray* errors;
-@property (nonatomic) NSArray* items;
+@property (nonatomic) CDA_GENERICS(NSArray, CDAError*)* errors;
+@property (nonatomic) CDA_GENERICS(NSArray, ObjectType)* items;
 @property (nonatomic) NSUInteger limit;
 @property (nonatomic) NSString* nextPageUrlString;
 @property (nonatomic) NSString* nextSyncUrlString;

@@ -7,6 +7,7 @@
 //
 
 #import <ContentfulDeliveryAPI/CDAAsset.h>
+#import <ContentfulDeliveryAPI/CDAGenericsStubs.h>
 #import <ContentfulDeliveryAPI/CDAEntry.h>
 #import <ContentfulDeliveryAPI/CDASpace.h>
 
@@ -44,7 +45,7 @@ NSString* const CMAContentTypeHeader = @"application/vnd.contentful.management.v
 // Terrible workaround to keep static builds from stripping these classes out.
 +(void)load {
 #ifndef __clang_analyzer__
-    NSArray* classes = @[ [CDAContentType class] ];
+    CDA_GENERICS(NSArray, Class)* classes = @[ [CDAContentType class] ];
     classes = nil;
 #endif
 }
@@ -73,7 +74,7 @@ NSString* const CMAContentTypeHeader = @"application/vnd.contentful.management.v
 }
 
 -(void)fetchAllItemsFromArray:(CDAArray*)array
-                      success:(void (^)(NSArray* items))success
+                      success:(void (^)(CDA_GENERICS(NSArray, __kindof CDAResource*)* items))success
                       failure:(CDARequestFailureBlock)failure {
     [self fetchAllItemsFromArray:array
                 intoMutableArray:[array.items mutableCopy]
@@ -82,8 +83,8 @@ NSString* const CMAContentTypeHeader = @"application/vnd.contentful.management.v
 }
 
 -(void)fetchAllItemsFromArray:(CDAArray*)array
-             intoMutableArray:(NSMutableArray*)resultArray
-                      success:(void (^)(NSArray* items))success
+             intoMutableArray:(CDA_GENERICS(NSMutableArray, __kindof CDAResource*)*)resultArray
+                      success:(void (^)(CDA_GENERICS(NSArray, __kindof CDAResource*)* items))success
                       failure:(CDARequestFailureBlock)failure {
     CDARequest* request = [self fetchNextItemsFromArray:array
                                                 success:^(CDAResponse *response, CDAArray *array) {
@@ -449,9 +450,9 @@ NSString* const CMAContentTypeHeader = @"application/vnd.contentful.management.v
 }
 
 -(void)resolveLinkAtIndex:(NSUInteger)index
-                fromArray:(NSArray*)fromArray
-                  toArray:(NSMutableArray*)toArray
-                  success:(void (^)(NSArray* items))success
+                fromArray:(CDA_GENERICS(NSArray, __kindof CDAResource*)*)fromArray
+                  toArray:(CDA_GENERICS(NSMutableArray, __kindof CDAResource*)*)toArray
+                  success:(void (^)(CDA_GENERICS(NSArray, __kindof CDAResource*)* items))success
                   failure:(CDARequestFailureBlock)failure {
     if (index >= fromArray.count) {
         if (success) {
@@ -473,8 +474,8 @@ NSString* const CMAContentTypeHeader = @"application/vnd.contentful.management.v
     } failure:failure];
 }
 
--(void)resolveLinksFromArray:(NSArray*)array
-                     success:(void (^)(NSArray* items))success
+-(void)resolveLinksFromArray:(CDA_GENERICS(NSArray, __kindof CDAResource*)*)array
+                     success:(void (^)(CDA_GENERICS(NSArray, __kindof CDAResource*)* items))success
                      failure:(CDARequestFailureBlock)failure {
     if (!CDAClassIsOfType([[array firstObject] class], CDAResource.class)) {
         if (success) {

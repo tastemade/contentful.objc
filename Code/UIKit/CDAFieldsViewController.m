@@ -23,7 +23,7 @@
 @interface CDAFieldsViewController ()
 
 @property (nonatomic) CDAEntry* entry;
-@property (nonatomic) NSArray* fields;
+@property (nonatomic) CDA_GENERICS(NSArray, CDAField*)* fields;
 
 @end
 
@@ -40,7 +40,7 @@
 -(void)didSelectRowWithValue:(id)value forField:(CDAField *)field {
     switch (field.type) {
         case CDAFieldTypeArray: {
-            NSArray* array = (NSArray*)value;
+            CDA_GENERICS(NSArray, id)* array = value;
             if (![array isKindOfClass:[NSArray class]]) {
                 return;
             }
@@ -181,7 +181,7 @@
     return self;
 }
 
--(void)showResourcesFromArray:(NSArray*)array withTitle:(NSString*)title {
+-(void)showResourcesFromArray:(CDA_GENERICS(NSArray, __kindof CDAResource*)*)array withTitle:(NSString*)title {
     NSDictionary* cellMapping = nil;
     CDAResource* resource = [array firstObject];
     
@@ -215,7 +215,7 @@
     [alertView show];
 }
 
--(NSArray*)visibleFields {
+-(CDA_GENERICS(NSArray, NSString*)*)visibleFields {
     return nil;
 }
 
