@@ -75,6 +75,9 @@ static NSCache* cache = nil;
                                            success:^(CDAResponse *response, CDAAsset *asset) {
                                                if ([asset updatedAfterDate:date]) {
                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                       if (![self.requestURL_cda isEqual:URL]) {
+                                                          return;
+                                                       }
                                                        [self cda_fetchImageWithAsset:asset
                                                                                  URL:URL
                                                                     placeholderImage:cachedImage];
@@ -94,6 +97,9 @@ static NSCache* cache = nil;
                     [cache setObject:cachedImage forKey:cacheFilePath];
                 }
 
+                if (![self.requestURL_cda isEqual:URL]) {
+                  return;
+                }
                 self.image = cachedImage;
             });
 
@@ -102,6 +108,9 @@ static NSCache* cache = nil;
     }
 
     dispatch_async(dispatch_get_main_queue(), ^{
+        if (![self.requestURL_cda isEqual:URL]) {
+          return;
+        }
         [self cda_fetchImageWithAsset:asset URL:URL placeholderImage:placeholderImage];
     });
 }
@@ -119,7 +128,6 @@ static NSCache* cache = nil;
 
     [self showActivityIndicatorIfNeeded];
     
-    self.requestURL_cda = URL;
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:URL]
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
@@ -155,10 +163,15 @@ static NSCache* cache = nil;
                          URL:(NSURL*)URL
                         size:(CGSize)size
             placeholderImage:(UIImage *)placeholderImage {
+    self.requestURL_cda = URL;
+    
     [self cda_validateAsset:asset];
     
     if (self.offlineCaching_cda) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            if (![self.requestURL_cda isEqual:URL]) {
+              return;
+            }
             [self cda_decompressImageWithAsset:asset
                                        forSize:size
                                          atURL:URL
