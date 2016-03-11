@@ -97,6 +97,12 @@
                         size:(CGSize)size
             placeholderImage:(UIImage* __nullable)placeholderImage;
 
+- (void)cda_setImageWithAsset:(CDAAsset * __nonnull)asset
+                         size:(CGSize)size
+             placeholderImage:(UIImage* __nullable)placeholderImage
+                      quality:(CGFloat)quality
+                       format:(CDAImageFormat)format;
+
 /**
  *  Set this image view's image to the image file retrieved from the given Asset.
  *
