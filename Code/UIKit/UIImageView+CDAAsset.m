@@ -40,77 +40,68 @@ static NSCache* cache = nil;
     if (asset.size.width < size.width) {
         size.width = asset.size.width;
     }
-
+    
     if (asset.size.height < size.height) {
         size.height = asset.size.height;
     }
-
+    
     if (!cache) {
         cache = [NSCache new];
     }
-
+    
     NSString* cacheFilePath = CDACacheFileNameForResource(asset);
-
+    
     if ([[NSFileManager defaultManager] fileExistsAtPath:cacheFilePath]) {
         BOOL cached = YES;
         UIImage* cachedImage = [cache objectForKey:cacheFilePath];
-
+        
         if (!cachedImage) {
             NSData* data = [NSData dataWithContentsOfFile:cacheFilePath];
-
+            
             cached = NO;
             cachedImage = [UIImage imageWithData:data];
-
+            
             data = nil;
         }
-
+        
         NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:cacheFilePath error:nil];
         NSDate *date = [attributes fileModificationDate];
-
+        
         if (![asset updatedAfterDate:date]
             && size.width <= cachedImage.size.width
             && size.height <= cachedImage.size.height) {
-
+            
             [asset.client fetchAssetWithIdentifier:asset.identifier
                                            success:^(CDAResponse *response, CDAAsset *asset) {
                                                if ([asset updatedAfterDate:date]) {
                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                       if (![self.requestURL_cda isEqual:URL]) {
-                                                          return;
-                                                       }
                                                        [self cda_fetchImageWithAsset:asset
                                                                                  URL:URL
                                                                     placeholderImage:cachedImage];
                                                    });
                                                }
                                            } failure:nil];
-
+            
             if (!cached) {
                 UIGraphicsBeginImageContextWithOptions(cachedImage.size, YES, 0);
                 [cachedImage drawAtPoint:CGPointZero];
                 cachedImage = UIGraphicsGetImageFromCurrentImageContext();
                 UIGraphicsEndImageContext();
             }
-
+            
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (!cached) {
                     [cache setObject:cachedImage forKey:cacheFilePath];
                 }
-
-                if (![self.requestURL_cda isEqual:URL]) {
-                  return;
-                }
+                
                 self.image = cachedImage;
             });
-
+            
             return;
         }
     }
-
+    
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (![self.requestURL_cda isEqual:URL]) {
-          return;
-        }
         [self cda_fetchImageWithAsset:asset URL:URL placeholderImage:placeholderImage];
     });
 }
@@ -121,13 +112,14 @@ static NSCache* cache = nil;
     if (placeholderImage) {
         self.image = placeholderImage;
     }
-
+    
     if (!URL) {
         return;
     }
-
+    
     [self showActivityIndicatorIfNeeded];
     
+    self.requestURL_cda = URL;
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:URL]
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
@@ -135,7 +127,7 @@ static NSCache* cache = nil;
                                    return;
                                }
                                self.requestURL_cda = nil;
-
+                               
                                [self hideActivityIndicator];
                                
                                if (!data) {
@@ -151,10 +143,10 @@ static NSCache* cache = nil;
 -(void)cda_handleCachingForAsset:(CDAAsset*)asset {
     if (self.offlineCaching_cda && self.image) {
         UIImage* image = self.image;
-
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [UIImagePNGRepresentation(image) writeToFile:CDACacheFileNameForResource(asset)
-                                                   atomically:YES];
+                                              atomically:YES];
         });
     }
 }
@@ -163,21 +155,16 @@ static NSCache* cache = nil;
                          URL:(NSURL*)URL
                         size:(CGSize)size
             placeholderImage:(UIImage *)placeholderImage {
-    self.requestURL_cda = URL;
-    
     [self cda_validateAsset:asset];
     
     if (self.offlineCaching_cda) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            if (![self.requestURL_cda isEqual:URL]) {
-              return;
-            }
             [self cda_decompressImageWithAsset:asset
                                        forSize:size
                                          atURL:URL
                               placeholderImage:placeholderImage];
         });
-
+        
         return;
     }
     
@@ -190,6 +177,11 @@ static NSCache* cache = nil;
 
 -(void)cda_setImageWithAsset:(CDAAsset *)asset size:(CGSize)size {
     [self cda_setImageWithAsset:asset size:size placeholderImage:nil];
+}
+
+- (void)cda_setImageWithAsset:(CDAAsset *)asset size:(CGSize)size quality:(CGFloat)quality format:(CDAImageFormat)format
+{
+    [self cda_setImageWithAsset:asset size:size quality:1.0 format:format];
 }
 
 -(void)cda_setImageWithAsset:(CDAAsset *)asset placeholderImage:(UIImage *)placeholderImage {
@@ -249,25 +241,25 @@ static NSCache* cache = nil;
     
     [activityView startAnimating];
     [self addSubview:activityView];
-
+    
     if (CGSizeEqualToSize(self.frame.size, CGSizeZero)) {
         activityView.translatesAutoresizingMaskIntoConstraints = NO;
-
+        
         [self addConstraint:[self layoutConstraintsWithItem:activityView
                                                      toItem:self
                                                   attribute:NSLayoutAttributeCenterX
                                                    constant:0.0]];
-
+        
         [self addConstraint:[self layoutConstraintsWithItem:activityView
                                                      toItem:self
                                                   attribute:NSLayoutAttributeCenterY
                                                    constant:0.0]];
-
+        
         [activityView addConstraint:[self layoutConstraintsWithItem:activityView
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeWidth
                                                            constant:activityView.frame.size.width]];
-
+        
         [activityView addConstraint:[self layoutConstraintsWithItem:activityView
                                                              toItem:nil
                                                           attribute:NSLayoutAttributeHeight
