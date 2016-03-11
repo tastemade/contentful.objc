@@ -129,8 +129,8 @@ const CGFloat CDARadiusNone             = 0.0;
 }
 
 -(NSURL *)imageURLWithSize:(CGSize)size {
-    //return [self imageURLWithSize:size quality:CDAImageQualityOriginal format:CDAImageFormatOriginal];
-    return [self imageURLWithSize:size quality:0.8 format:CDAImageFormatJPEG];
+    return [self imageURLWithSize:size quality:CDAImageQualityOriginal format:CDAImageFormatOriginal];
+    //return [self imageURLWithSize:size quality:0.8 format:CDAImageFormatJPEG];
 }
 
 -(NSURL *)imageURLWithSize:(CGSize)size quality:(CGFloat)quality format:(CDAImageFormat)format {
