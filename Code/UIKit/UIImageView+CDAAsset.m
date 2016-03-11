@@ -179,6 +179,11 @@ static NSCache* cache = nil;
     [self cda_setImageWithAsset:asset size:size placeholderImage:nil];
 }
 
+- (void)cda_setImageWithAsset:(CDAAsset *)asset size:(CGSize)size quality:(CGFloat)quality format:(CDAImageFormat)format
+{
+    [self cda_setImageWithAsset:asset size:size quality:1.0 format:format];
+}
+
 -(void)cda_setImageWithAsset:(CDAAsset *)asset placeholderImage:(UIImage *)placeholderImage {
     [self cda_setImageWithAsset:asset size:asset.size placeholderImage:placeholderImage];
 }

@@ -13,8 +13,7 @@
 #endif
 
 #import <ContentfulDeliveryAPI/CDAPersistedAsset.h>
-
-@class CDAAsset;
+#import "CDAAsset.h"
 
 /**
  Convenience category on `UIImageView` which allows asynchronously setting its image from a given
@@ -44,6 +43,31 @@
  *  @exception NSIllegalArgumentException If the Asset is pointing to an image.
  */
 -(void)cda_setImageWithAsset:(CDAAsset* __nonnull)asset size:(CGSize)size;
+
+/**
+ *  Set this image view's image to the image file retrieved from the given Asset.
+ *
+ *  This will happen asynchronously in the background.
+ *
+ *  @param asset An Asset pointing to an image.
+ *  @param size             The desired size of the image. It will be resized by the server.
+ *  @param format The desired image format (e.g. PNG, JPEG, Original)
+ *  @exception NSIllegalArgumentException If the Asset is pointing to an image.
+ */
+- (void)cda_setImageWithAsset:(CDAAsset * __nonnull)asset size:(CGSize)size format:(CDAImageFormat)format;
+
+/**
+ *  Set this image view's image to the image file retrieved from the given Asset.
+ *
+ *  This will happen asynchronously in the background.
+ *
+ *  @param asset An Asset pointing to an image.
+ *  @param size             The desired size of the image. It will be resized by the server.
+ *  @param quality The quality of the desired image
+ *  @param format The desired image format (e.g. PNG, JPEG, Original)
+ *  @exception NSIllegalArgumentException If the Asset is pointing to an image.
+ */
+- (void)cda_setImageWithAsset:(CDAAsset * __nonnull)asset size:(CGSize)size quality:(CGFloat)quality format:(CDAImageFormat)format;
 
 /**
  *  Set this image view's image to the image file retrieved from the given Asset. 

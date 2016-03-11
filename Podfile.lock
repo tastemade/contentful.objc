@@ -1,23 +1,23 @@
 PODS:
-  - AFNetworking (2.5.3):
-    - AFNetworking/NSURLConnection (= 2.5.3)
-    - AFNetworking/NSURLSession (= 2.5.3)
-    - AFNetworking/Reachability (= 2.5.3)
-    - AFNetworking/Security (= 2.5.3)
-    - AFNetworking/Serialization (= 2.5.3)
-    - AFNetworking/UIKit (= 2.5.3)
-  - AFNetworking/NSURLConnection (2.5.3):
+  - AFNetworking (2.5.4):
+    - AFNetworking/NSURLConnection (= 2.5.4)
+    - AFNetworking/NSURLSession (= 2.5.4)
+    - AFNetworking/Reachability (= 2.5.4)
+    - AFNetworking/Security (= 2.5.4)
+    - AFNetworking/Serialization (= 2.5.4)
+    - AFNetworking/UIKit (= 2.5.4)
+  - AFNetworking/NSURLConnection (2.5.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.3):
+  - AFNetworking/NSURLSession (2.5.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.3)
-  - AFNetworking/Security (2.5.3)
-  - AFNetworking/Serialization (2.5.3)
-  - AFNetworking/UIKit (2.5.3):
+  - AFNetworking/Reachability (2.5.4)
+  - AFNetworking/Security (2.5.4)
+  - AFNetworking/Serialization (2.5.4)
+  - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - CCLRequestReplay (0.9.0):
@@ -36,13 +36,13 @@ PODS:
     - ISO8601DateFormatter
   - ContentfulPersistence (0.3.2):
     - ContentfulDeliveryAPI (~> 1.9.1)
-  - FBSnapshotTestCase (1.5)
+  - FBSnapshotTestCase (1.6)
   - ISO8601DateFormatter (0.7)
-  - OCMock (2.2.4)
+  - OCMock (3.2.2)
   - PDKTCollectionViewWaterfallLayout (0.1)
-  - Realm (0.88.0):
-    - Realm/Headers (= 0.88.0)
-  - Realm/Headers (0.88.0)
+  - Realm (0.90.6):
+    - Realm/Headers (= 0.90.6)
+  - Realm/Headers (0.90.6)
   - VCRURLConnection (0.2.0)
 
 DEPENDENCIES:
@@ -62,7 +62,7 @@ EXTERNAL SOURCES:
   CCLRequestReplay:
     :git: https://github.com/neonichu/CCLRequestReplay.git
   ContentfulDeliveryAPI:
-    :path: "."
+    :path: .
 
 CHECKOUT OPTIONS:
   CCLRequestReplay:
@@ -70,15 +70,15 @@ CHECKOUT OPTIONS:
     :git: https://github.com/neonichu/CCLRequestReplay.git
 
 SPEC CHECKSUMS:
-  AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
+  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   CCLRequestReplay: a472e52da260c28d7a41df76697b8e518625a44f
   ContentfulDeliveryAPI: c626f488a9ca53c2f07029593760cdd2c66b9713
   ContentfulPersistence: fd9ce1235865a968b7c7a57afebf7f235579842d
-  FBSnapshotTestCase: 26f32d8fa9eb30e9f09712ecfb097808bc79b898
+  FBSnapshotTestCase: 9d5fe43b29ae3a0ed8fc829477971b281038f748
   ISO8601DateFormatter: ab926648eebe497f4d167c0fd083992f959f1274
-  OCMock: a6a7dc0e3997fb9f35d99f72528698ebf60d64f2
+  OCMock: 18c9b7e67d4c2770e95bb77a9cc1ae0c91fe3835
   PDKTCollectionViewWaterfallLayout: a246de22e843bdb2677ab2fe5d6c1fb0a623f93e
-  Realm: 0c9ee710b77cf79809c1ed85655fed9f1f887142
+  Realm: a4b2766a29006293693a0f26664ecb5a84a54455
   VCRURLConnection: accd771ebd4be11183a3e4d5a4403f180a9a235e
 
-COCOAPODS: 0.36.1
+COCOAPODS: 0.39.0
