@@ -77,7 +77,8 @@ static NSCache* cache = nil;
                                                    dispatch_async(dispatch_get_main_queue(), ^{
                                                        [self cda_fetchImageWithAsset:asset
                                                                                  URL:URL
-                                                                    placeholderImage:cachedImage];
+                                                                    placeholderImage:cachedImage
+                                                                          completion:nil];
                                                    });
                                                }
                                            } failure:nil];
@@ -102,13 +103,14 @@ static NSCache* cache = nil;
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self cda_fetchImageWithAsset:asset URL:URL placeholderImage:placeholderImage];
+        [self cda_fetchImageWithAsset:asset URL:URL placeholderImage:placeholderImage completion:nil];
     });
 }
 
 -(void)cda_fetchImageWithAsset:(CDAAsset*)asset
                            URL:(NSURL*)URL
-              placeholderImage:(UIImage *)placeholderImage {
+              placeholderImage:(UIImage *)placeholderImage
+                    completion:(CDAImageCompletionBlock __nullable)completion {
     if (placeholderImage) {
         self.image = placeholderImage;
     }
@@ -135,8 +137,13 @@ static NSCache* cache = nil;
                                    return;
                                }
                                
-                               self.image = [UIImage imageWithData:data];
+                               UIImage *image = [UIImage imageWithData:data];
+                               self.image = image;
                                [self cda_handleCachingForAsset:asset];
+                               
+                               if (completion) {
+                                   completion(image);
+                               }
                            }];
 }
 
@@ -154,7 +161,8 @@ static NSCache* cache = nil;
 -(void)cda_setImageWithAsset:(CDAAsset*)asset
                          URL:(NSURL*)URL
                         size:(CGSize)size
-            placeholderImage:(UIImage *)placeholderImage {
+            placeholderImage:(UIImage *)placeholderImage
+                  completion:(CDAImageCompletionBlock)completion {
     [self cda_validateAsset:asset];
     
     if (self.offlineCaching_cda) {
@@ -168,7 +176,7 @@ static NSCache* cache = nil;
         return;
     }
     
-    [self cda_fetchImageWithAsset:asset URL:URL placeholderImage:placeholderImage];
+    [self cda_fetchImageWithAsset:asset URL:URL placeholderImage:placeholderImage completion:completion];
 }
 
 -(void)cda_setImageWithAsset:(CDAAsset *)asset {
@@ -186,7 +194,7 @@ static NSCache* cache = nil;
 
 - (void)cda_setImageWithAsset:(CDAAsset *)asset size:(CGSize)size quality:(CGFloat)quality format:(CDAImageFormat)format
 {
-    [self cda_setImageWithAsset:asset URL:[asset imageURLWithSize:size quality:quality format:format] size:size placeholderImage:nil];
+    [self cda_setImageWithAsset:asset URL:[asset imageURLWithSize:size quality:quality format:format] size:size placeholderImage:nil completion:nil];
 }
 
 -(void)cda_setImageWithAsset:(CDAAsset *)asset placeholderImage:(UIImage *)placeholderImage {
@@ -199,7 +207,7 @@ static NSCache* cache = nil;
     [self cda_setImageWithAsset:asset
                             URL:[asset imageURLWithSize:size]
                            size:size
-               placeholderImage:placeholderImage];
+               placeholderImage:placeholderImage completion:nil];
 }
 
 - (void)cda_setImageWithAsset:(CDAAsset * __nonnull)asset
@@ -208,7 +216,7 @@ static NSCache* cache = nil;
                       quality:(CGFloat)quality
                        format:(CDAImageFormat)format
 {
-    [self cda_setImageWithAsset:asset URL:[asset imageURLWithSize:size quality:quality format:format] size:size placeholderImage:placeholderImage];
+    [self cda_setImageWithAsset:asset URL:[asset imageURLWithSize:size quality:quality format:format] size:size placeholderImage:placeholderImage completion:nil];
 }
 
 -(void)cda_setImageWithPersistedAsset:(id<CDAPersistedAsset>)asset
@@ -218,6 +226,16 @@ static NSCache* cache = nil;
     [self cda_setImageWithAsset:asset ? [CDAAsset assetFromPersistedAsset:asset client:client] : nil
                            size:size
                placeholderImage:placeholderImage];
+}
+
+- (void)cda_setImageWithAsset:(CDAAsset * __nonnull)asset
+                         size:(CGSize)size
+             placeholderImage:(UIImage* __nullable)placeholderImage
+                      quality:(CGFloat)quality
+                       format:(CDAImageFormat)format
+                   completion:(CDAImageCompletionBlock __nullable)completion
+{
+    [self cda_setImageWithAsset:asset URL:[asset imageURLWithSize:size quality:quality format:format] size:size placeholderImage:placeholderImage completion:completion];
 }
 
 -(void)cda_validateAsset:(CDAAsset *)asset {

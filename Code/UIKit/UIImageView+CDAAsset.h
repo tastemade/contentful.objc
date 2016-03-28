@@ -15,6 +15,8 @@
 #import <ContentfulDeliveryAPI/CDAPersistedAsset.h>
 #import "CDAAsset.h"
 
+typedef void(^CDAImageCompletionBlock)(UIImage * __nullable image);
+
 /**
  Convenience category on `UIImageView` which allows asynchronously setting its image from a given
  Asset.
@@ -102,6 +104,13 @@
              placeholderImage:(UIImage* __nullable)placeholderImage
                       quality:(CGFloat)quality
                        format:(CDAImageFormat)format;
+
+- (void)cda_setImageWithAsset:(CDAAsset * __nonnull)asset
+                         size:(CGSize)size
+             placeholderImage:(UIImage* __nullable)placeholderImage
+                      quality:(CGFloat)quality
+                       format:(CDAImageFormat)format
+                   completion:(CDAImageCompletionBlock __nullable)completion;
 
 /**
  *  Set this image view's image to the image file retrieved from the given Asset.
