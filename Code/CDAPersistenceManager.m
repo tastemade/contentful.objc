@@ -13,12 +13,12 @@
 #import <ContentfulDeliveryAPI/CDAContentType.h>
 #import <ContentfulDeliveryAPI/CDAField.h>
 #import <ContentfulDeliveryAPI/CDALocalizablePersistedEntry.h>
+#import <ContentfulDeliveryAPI/CDAPersistenceManager.h>
 #import <ContentfulDeliveryAPI/CDASyncedSpace.h>
 
 #import "CDAClient+Private.h"
 #import "CDAContentTypeRegistry.h"
 #import "CDAEntry+Private.h"
-#import "CDAPersistenceManager.h"
 #import "CDAUtilities.h"
 
 @interface CDAPersistenceManager () <CDASyncedSpaceDelegate>
@@ -266,15 +266,21 @@
     return [relationshipMapping copy];
 }
 
+-(void)performBlock:(void (^)())block {
+    block();
+}
+
 -(void)performInitalSynchronizationForQueryWithSuccess:(void (^)())success
                                                failure:(CDARequestFailureBlock)failure {
     NSDate* syncTimestamp = [self roundedCurrentDate];
     
     [self.client fetchEntriesMatching:self.query success:^(CDAResponse *response, CDAArray *array) {
-        id<CDAPersistedSpace> space = [self fetchSpaceFromDataStore];
-        space.lastSyncTimestamp = syncTimestamp;
+        [self performBlock:^{
+            id<CDAPersistedSpace> space = [self fetchSpaceFromDataStore];
+            space.lastSyncTimestamp = syncTimestamp;
         
-        [self handleResponseArray:array withSuccess:success];
+            [self handleResponseArray:array withSuccess:success];
+        }];
     } failure:failure];
 }
 
@@ -293,15 +299,19 @@
                                       @"sys.updatedAt[gt]": space.lastSyncTimestamp };
     
     [self.client fetchEntriesMatching:query success:^(CDAResponse *response, CDAArray *entries) {
-        space.lastSyncTimestamp = syncTimestamp;
+        [self performBlock:^{
+            space.lastSyncTimestamp = syncTimestamp;
+        }];
         
         [self.client fetchAssetsMatching:queryForAssets
                                  success:^(CDAResponse *response, CDAArray *assets) {
-                                     for (CDAAsset* asset in assets.items) {
-                                         [self handleAsset:asset];
-                                     }
-                                     
-                                     [self handleResponseArray:entries withSuccess:success];
+                                     [self performBlock:^{
+                                         for (CDAAsset* asset in assets.items) {
+                                             [self handleAsset:asset];
+                                         }
+
+                                         [self handleResponseArray:entries withSuccess:success];
+                                     }];
                                  }
                                  failure:failure];
     } failure:failure];
@@ -319,11 +329,15 @@
     if (self.query) {
         if (self.syncedSpace) {
             [self.syncedSpace performSynchronizationWithSuccess:^{
-                [self performSubsequentSynchronizationWithSuccess:success failure:failure];
+                [self performBlock:^{
+                    [self performSubsequentSynchronizationWithSuccess:success failure:failure];
+                }];
             } failure:failure];
         } else {
             [self.client initialSynchronizationMatching:@{ @"type": @"Deletion" } success:^(CDAResponse *response, CDASyncedSpace *space) {
-                [self persistedSpaceForSpace:space];
+                [self performBlock:^{
+                    [self persistedSpaceForSpace:space];
+                }];
                 [self performInitalSynchronizationForQueryWithSuccess:success failure:failure];
             } failure:failure];
         }
@@ -334,21 +348,23 @@
     if (!self.syncedSpace) {
         CDARequest* request = [self.client initialSynchronizationWithSuccess:^(CDAResponse *response,
                                                                                CDASyncedSpace *space) {
-            [self persistedSpaceForSpace:space];
-            
-            for (CDAAsset* asset in space.assets) {
-                [self persistedAssetForAsset:asset];
-            }
-            
-            for (CDAEntry* entry in space.entries) {
-                [self persistedEntryForEntry:entry];
-            }
-            
-            [self saveDataStore];
-            
-            if (success) {
-                success();
-            }
+            [self performBlock:^{
+                [self persistedSpaceForSpace:space];
+
+                for (CDAAsset* asset in space.assets) {
+                    [self persistedAssetForAsset:asset];
+                }
+
+                for (CDAEntry* entry in space.entries) {
+                    [self persistedEntryForEntry:entry];
+                }
+
+                [self saveDataStore];
+
+                if (success) {
+                    success();
+                }
+            }];
         } failure:failure];
 
         if (request) {
@@ -358,15 +374,17 @@
     }
     
     [self.syncedSpace performSynchronizationWithSuccess:^{
-        id<CDAPersistedSpace> space = [self fetchSpaceFromDataStore];
-        space.lastSyncTimestamp = self.syncedSpace.lastSyncTimestamp;
-        space.syncToken = self.syncedSpace.syncToken;
-        
-        [self saveDataStore];
-        
-        if (success) {
-            success();
-        }
+        [self performBlock:^{
+            id<CDAPersistedSpace> space = [self fetchSpaceFromDataStore];
+            space.lastSyncTimestamp = self.syncedSpace.lastSyncTimestamp;
+            space.syncToken = self.syncedSpace.syncToken;
+
+            [self saveDataStore];
+
+            if (success) {
+                success();
+            }
+        }];
     } failure:failure];
 }
 
@@ -496,56 +514,62 @@
 #pragma mark - CDASyncedSpaceDelegate
 
 -(void)syncedSpace:(CDASyncedSpace *)space didCreateAsset:(CDAAsset *)asset {
-    self.hasChanged = YES;
-
-    [self persistedAssetForAsset:asset];
+    [self syncedSpace:space didUpdateAsset:asset];
 }
 
 -(void)syncedSpace:(CDASyncedSpace *)space didCreateEntry:(CDAEntry *)entry {
-    self.hasChanged = YES;
-
-    [self persistedEntryForEntry:entry];
+    [self syncedSpace:space didUpdateEntry:entry];
 }
 
 -(void)syncedSpace:(CDASyncedSpace *)space didDeleteAsset:(CDAAsset *)asset {
-    self.hasChanged = YES;
+    [self performBlock:^{
+        self.hasChanged = YES;
 
-    [self deleteAssetWithIdentifier:asset.identifier];
+        [self deleteAssetWithIdentifier:asset.identifier];
+    }];
 }
 
 -(void)syncedSpace:(CDASyncedSpace *)space didDeleteEntry:(CDAEntry *)entry {
-    self.hasChanged = YES;
+    [self performBlock:^{
+        self.hasChanged = YES;
 
-    [self deleteEntryWithIdentifier:entry.identifier];
+        [self deleteEntryWithIdentifier:entry.identifier];
+    }];
 }
 
 -(void)syncedSpace:(CDASyncedSpace *)space didUpdateAsset:(CDAAsset *)asset {
-    self.hasChanged = YES;
+    [self performBlock:^{
+        self.hasChanged = YES;
 
-    id<CDAPersistedAsset> persistedAsset = [self fetchAssetWithIdentifier:asset.identifier];
-    
-    if (!persistedAsset) {
-        persistedAsset = [self createPersistedAsset];
-    }
-    
-    [self updatePersistedAsset:persistedAsset withAsset:asset];
+        id<CDAPersistedAsset> persistedAsset = [self fetchAssetWithIdentifier:asset.identifier];
+
+        if (!persistedAsset) {
+            persistedAsset = [self createPersistedAsset];
+        }
+
+        [self updatePersistedAsset:persistedAsset withAsset:asset];
+    }];
 }
 
 -(void)syncedSpace:(CDASyncedSpace *)space didUpdateEntry:(CDAEntry *)entry {
-    NSString* identifier = entry.contentType.identifier;
-    if (!identifier) {
-        return;
-    }
+    [self performBlock:^{
+        NSString* identifier = entry.contentType.identifier;
+        if (!identifier) {
+            return;
+        }
 
-    self.hasChanged = YES;
+        self.hasChanged = YES;
 
-    id<CDAPersistedEntry> persistedEntry = [self fetchEntryWithIdentifier:entry.identifier];
-    
-    if (!persistedEntry) {
-        persistedEntry = [self createPersistedEntryForContentTypeWithIdentifier:identifier];
-    }
-    
-    [self updatePersistedEntry:persistedEntry withEntry:entry];
+        id<CDAPersistedEntry> persistedEntry = [self fetchEntryWithIdentifier:entry.identifier];
+
+        if (!persistedEntry) {
+            persistedEntry = [self createPersistedEntryForContentTypeWithIdentifier:identifier];
+        }
+
+        if (persistedEntry) {
+            [self updatePersistedEntry:persistedEntry withEntry:entry];
+        }
+    }];
 }
 
 @end

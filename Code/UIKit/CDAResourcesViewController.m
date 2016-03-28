@@ -6,11 +6,11 @@
 //
 //
 
+#import <ContentfulDeliveryAPI/CDAImageViewController.h>
+#import <ContentfulDeliveryAPI/CDAResourcesViewController.h>
 #import <ContentfulDeliveryAPI/ContentfulDeliveryAPI.h>
 
 #import "CDAFieldsViewController+Private.h"
-#import "CDAImageViewController.h"
-#import "CDAResourcesViewController.h"
 #import "CDAUtilities.h"
 
 @interface CDAResourcesViewController () <UISearchBarDelegate>
@@ -83,9 +83,12 @@
         self.cellMapping = cellMapping;
         self.firstTime = YES;
         self.resourceType = CDAResourceTypeEntry;
-        
-        self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
-        
+
+        if ([self.tableView respondsToSelector:@selector(keyboardDismissMode)]) {
+            [self.tableView setValue:@(UIScrollViewKeyboardDismissModeInteractive)
+                              forKey:@"keyboardDismissMode"];
+        }
+
         [self.tableView registerClass:[[self class] cellClass]
                forCellReuseIdentifier:NSStringFromClass([self class])];
     }

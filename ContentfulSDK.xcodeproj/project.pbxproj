@@ -33,6 +33,7 @@
 		A160862218CDF0E60047D44F /* CDARequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A160862018CDF0E60047D44F /* CDARequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A160862318CDF0E60047D44F /* CDARequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A160862118CDF0E60047D44F /* CDARequest.m */; };
 		A160862518CDF2AC0047D44F /* CDARequest+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = A160862418CDF2AC0047D44F /* CDARequest+Private.h */; };
+		A16675BF1C7C5EC800231AC1 /* RealmClassHierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = A16675BE1C7C5EC800231AC1 /* RealmClassHierarchy.m */; };
 		A17012F418FC1FD90086BE07 /* CDAPersistedEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = A17012F318FC1FD90086BE07 /* CDAPersistedEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A17012F618FC1FF80086BE07 /* CDAPersistedAsset.h in Headers */ = {isa = PBXBuildFile; fileRef = A17012F518FC1FEE0086BE07 /* CDAPersistedAsset.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A17012F818FC20120086BE07 /* CDAPersistedSpace.h in Headers */ = {isa = PBXBuildFile; fileRef = A17012F718FC20120086BE07 /* CDAPersistedSpace.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -188,18 +189,18 @@
 		A1B815D618F7E2F20027B26D /* AddContentTypesSyncTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B815D518F7E2F20027B26D /* AddContentTypesSyncTests.m */; };
 		A1B815D818F830C00027B26D /* ComplexLinkSyncTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B815D718F830C00027B26D /* ComplexLinkSyncTests.m */; };
 		A1BA6F9119DBECC600AC3471 /* ClientConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = A1BA6F9019DBECC600AC3471 /* ClientConfiguration.m */; };
+		A1BEA5C71C7B6E2700B63E86 /* RealmAdvancedTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1BEA5C61C7B6E2700B63E86 /* RealmAdvancedTests.m */; };
 		A1C180691A038B3300117DB3 /* RobustnessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C180671A0388F800117DB3 /* RobustnessTests.m */; };
 		A1C1AC4318CE032200DBF0D0 /* CDAClient+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = A1C1AC4218CE032200DBF0D0 /* CDAClient+Private.h */; };
+		A1C4EE8E1C4E61F10065EA72 /* APICoverageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C4EE8D1C4E61F10065EA72 /* APICoverageTests.m */; };
+		A1C4EE901C4E6B730065EA72 /* APICoverageTests.json in Resources */ = {isa = PBXBuildFile; fileRef = A1C4EE8F1C4E6B730065EA72 /* APICoverageTests.json */; };
 		A1C8DCD318E098E80019A519 /* LinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C8DCD218E098E80019A519 /* LinkTests.m */; };
 		A1CEC1651A35B142007B4565 /* PersistenceBaseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CEC1641A35B142007B4565 /* PersistenceBaseTest.m */; };
 		A1CEC16B1A35DCA1007B4565 /* PersistenceBaseTest+Basic.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CEC16A1A35DCA1007B4565 /* PersistenceBaseTest+Basic.m */; };
 		A1CEC16E1A35DCCA007B4565 /* PersistenceBaseTest+QuerySync.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CEC16D1A35DCCA007B4565 /* PersistenceBaseTest+QuerySync.m */; };
-		A1CEC1A71A35ED58007B4565 /* RealmManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CEC1A61A35ED58007B4565 /* RealmManager.m */; };
 		A1CEC1AA1A35EE9D007B4565 /* RealmBasicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CEC1A81A35EE9D007B4565 /* RealmBasicTests.m */; };
 		A1CEC1AB1A35EE9D007B4565 /* RealmQuerySyncTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CEC1A91A35EE9D007B4565 /* RealmQuerySyncTests.m */; };
 		A1CEC1AD1A35EEB7007B4565 /* RealmBaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CEC1AC1A35EEB7007B4565 /* RealmBaseTestCase.m */; };
-		A1CEC1B11A360A0A007B4565 /* RealmSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CEC1B01A360A0A007B4565 /* RealmSpace.m */; };
-		A1CEC1B41A360A20007B4565 /* RealmAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CEC1B31A360A20007B4565 /* RealmAsset.m */; };
 		A1CEC1B71A360D2C007B4565 /* ManagedRealmCat.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CEC1B61A360D2C007B4565 /* ManagedRealmCat.m */; };
 		A1D1D35C18C8A94800261A1C /* ContentfulBaseTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D1D35B18C8A94800261A1C /* ContentfulBaseTestCase.m */; };
 		A1D1D35F18C8ABB800261A1C /* DocumentationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D1D35E18C8ABB800261A1C /* DocumentationTests.m */; };
@@ -315,6 +316,8 @@
 		A160862018CDF0E60047D44F /* CDARequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDARequest.h; sourceTree = "<group>"; };
 		A160862118CDF0E60047D44F /* CDARequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDARequest.m; sourceTree = "<group>"; };
 		A160862418CDF2AC0047D44F /* CDARequest+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CDARequest+Private.h"; sourceTree = "<group>"; };
+		A16675BD1C7C5EC800231AC1 /* RealmClassHierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmClassHierarchy.h; sourceTree = "<group>"; };
+		A16675BE1C7C5EC800231AC1 /* RealmClassHierarchy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmClassHierarchy.m; sourceTree = "<group>"; };
 		A17012F318FC1FD90086BE07 /* CDAPersistedEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDAPersistedEntry.h; sourceTree = "<group>"; };
 		A17012F518FC1FEE0086BE07 /* CDAPersistedAsset.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDAPersistedAsset.h; sourceTree = "<group>"; };
 		A17012F718FC20120086BE07 /* CDAPersistedSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDAPersistedSpace.h; sourceTree = "<group>"; };
@@ -506,8 +509,11 @@
 		A1B815D518F7E2F20027B26D /* AddContentTypesSyncTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddContentTypesSyncTests.m; sourceTree = "<group>"; };
 		A1B815D718F830C00027B26D /* ComplexLinkSyncTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComplexLinkSyncTests.m; sourceTree = "<group>"; };
 		A1BA6F9019DBECC600AC3471 /* ClientConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientConfiguration.m; sourceTree = "<group>"; };
+		A1BEA5C61C7B6E2700B63E86 /* RealmAdvancedTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmAdvancedTests.m; sourceTree = "<group>"; };
 		A1C180671A0388F800117DB3 /* RobustnessTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RobustnessTests.m; sourceTree = "<group>"; };
 		A1C1AC4218CE032200DBF0D0 /* CDAClient+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CDAClient+Private.h"; sourceTree = "<group>"; };
+		A1C4EE8D1C4E61F10065EA72 /* APICoverageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APICoverageTests.m; sourceTree = "<group>"; };
+		A1C4EE8F1C4E6B730065EA72 /* APICoverageTests.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = APICoverageTests.json; path = Data/Recordings/APICoverageTests.json; sourceTree = "<group>"; };
 		A1C8DCD218E098E80019A519 /* LinkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkTests.m; sourceTree = "<group>"; };
 		A1CEC1631A35B142007B4565 /* PersistenceBaseTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceBaseTest.h; sourceTree = "<group>"; };
 		A1CEC1641A35B142007B4565 /* PersistenceBaseTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceBaseTest.m; sourceTree = "<group>"; };
@@ -515,16 +521,10 @@
 		A1CEC16A1A35DCA1007B4565 /* PersistenceBaseTest+Basic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PersistenceBaseTest+Basic.m"; sourceTree = "<group>"; };
 		A1CEC16C1A35DCCA007B4565 /* PersistenceBaseTest+QuerySync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PersistenceBaseTest+QuerySync.h"; sourceTree = "<group>"; };
 		A1CEC16D1A35DCCA007B4565 /* PersistenceBaseTest+QuerySync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PersistenceBaseTest+QuerySync.m"; sourceTree = "<group>"; };
-		A1CEC1A51A35ED58007B4565 /* RealmManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RealmManager.h; path = Code/Realm/RealmManager.h; sourceTree = SOURCE_ROOT; };
-		A1CEC1A61A35ED58007B4565 /* RealmManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RealmManager.m; path = Code/Realm/RealmManager.m; sourceTree = SOURCE_ROOT; };
 		A1CEC1A81A35EE9D007B4565 /* RealmBasicTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmBasicTests.m; sourceTree = "<group>"; };
 		A1CEC1A91A35EE9D007B4565 /* RealmQuerySyncTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmQuerySyncTests.m; sourceTree = "<group>"; };
 		A1CEC1AC1A35EEB7007B4565 /* RealmBaseTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealmBaseTestCase.m; sourceTree = "<group>"; };
 		A1CEC1AE1A35EEE2007B4565 /* RealmBaseTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealmBaseTestCase.h; sourceTree = "<group>"; };
-		A1CEC1AF1A360A0A007B4565 /* RealmSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RealmSpace.h; path = Code/Realm/RealmSpace.h; sourceTree = SOURCE_ROOT; };
-		A1CEC1B01A360A0A007B4565 /* RealmSpace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RealmSpace.m; path = Code/Realm/RealmSpace.m; sourceTree = SOURCE_ROOT; };
-		A1CEC1B21A360A20007B4565 /* RealmAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RealmAsset.h; path = Code/Realm/RealmAsset.h; sourceTree = SOURCE_ROOT; };
-		A1CEC1B31A360A20007B4565 /* RealmAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RealmAsset.m; path = Code/Realm/RealmAsset.m; sourceTree = SOURCE_ROOT; };
 		A1CEC1B51A360D2C007B4565 /* ManagedRealmCat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagedRealmCat.h; sourceTree = "<group>"; };
 		A1CEC1B61A360D2C007B4565 /* ManagedRealmCat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagedRealmCat.m; sourceTree = "<group>"; };
 		A1D1D35B18C8A94800261A1C /* ContentfulBaseTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentfulBaseTestCase.m; sourceTree = "<group>"; };
@@ -1015,6 +1015,8 @@
 		A1B815C218F5812F0027B26D /* Basic Functionality */ = {
 			isa = PBXGroup;
 			children = (
+				A1C4EE8F1C4E6B730065EA72 /* APICoverageTests.json */,
+				A1C4EE8D1C4E61F10065EA72 /* APICoverageTests.m */,
 				A193EB5218D1C88A0017B777 /* ArrayTests.json */,
 				A1D2DC0618D0811F0053DC83 /* ArrayTests.m */,
 				A18AA85A18E4952800D430D5 /* AssetTests.json */,
@@ -1116,16 +1118,13 @@
 			children = (
 				A1CEC1B51A360D2C007B4565 /* ManagedRealmCat.h */,
 				A1CEC1B61A360D2C007B4565 /* ManagedRealmCat.m */,
-				A1CEC1B21A360A20007B4565 /* RealmAsset.h */,
-				A1CEC1B31A360A20007B4565 /* RealmAsset.m */,
+				A1BEA5C61C7B6E2700B63E86 /* RealmAdvancedTests.m */,
 				A1F5DE741B8B110200F0B554 /* RealmBasicTests.json */,
 				A1CEC1A81A35EE9D007B4565 /* RealmBasicTests.m */,
+				A16675BD1C7C5EC800231AC1 /* RealmClassHierarchy.h */,
+				A16675BE1C7C5EC800231AC1 /* RealmClassHierarchy.m */,
 				A1F5DE751B8B110200F0B554 /* RealmQuerySyncTests.json */,
 				A1CEC1A91A35EE9D007B4565 /* RealmQuerySyncTests.m */,
-				A1CEC1A51A35ED58007B4565 /* RealmManager.h */,
-				A1CEC1A61A35ED58007B4565 /* RealmManager.m */,
-				A1CEC1AF1A360A0A007B4565 /* RealmSpace.h */,
-				A1CEC1B01A360A0A007B4565 /* RealmSpace.m */,
 			);
 			name = Realm;
 			sourceTree = "<group>";
@@ -1495,6 +1494,7 @@
 			files = (
 				A12F19DE1BB48F190088C199 /* CoreDataMultipleLocalesTests.json in Resources */,
 				A12F19E01BB48F380088C199 /* ComplexSyncTests.json in Resources */,
+				A1C4EE901C4E6B730065EA72 /* APICoverageTests.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1966,12 +1966,12 @@
 				A1B815D018F69E0F0027B26D /* NewEntryAndDeletionSyncTest.m in Sources */,
 				A1521F151BB433600010B9C8 /* CoreDataLinkDeletionTests.m in Sources */,
 				A1B815BD18F56C150027B26D /* ComplexSyncTests.m in Sources */,
-				A1CEC1B11A360A0A007B4565 /* RealmSpace.m in Sources */,
 				A1B815BF18F56E620027B26D /* SyncBaseTestCase.m in Sources */,
 				A1521F1F1BB43F550010B9C8 /* LinkedData.xcdatamodeld in Sources */,
 				A12797AB18E1B08F00043A44 /* SyncTests.m in Sources */,
-				A1CEC1B41A360A20007B4565 /* RealmAsset.m in Sources */,
 				A1B815B418F2ACCB0027B26D /* PersistenceTests.m in Sources */,
+				A16675BF1C7C5EC800231AC1 /* RealmClassHierarchy.m in Sources */,
+				A1BEA5C71C7B6E2700B63E86 /* RealmAdvancedTests.m in Sources */,
 				A1BA6F9119DBECC600AC3471 /* ClientConfiguration.m in Sources */,
 				A193EB4018D09D180017B777 /* UIKitAdditionsTests.m in Sources */,
 				A193EB3B18D084C50017B777 /* ValueObjectsTests.m in Sources */,
@@ -1993,11 +1993,11 @@
 				A1A0314F18C756B7006470B7 /* SearchAPITests.m in Sources */,
 				A1B815D818F830C00027B26D /* ComplexLinkSyncTests.m in Sources */,
 				A1CEC16E1A35DCCA007B4565 /* PersistenceBaseTest+QuerySync.m in Sources */,
+				A1C4EE8E1C4E61F10065EA72 /* APICoverageTests.m in Sources */,
 				A1CEC1AD1A35EEB7007B4565 /* RealmBaseTestCase.m in Sources */,
 				A1D1D35C18C8A94800261A1C /* ContentfulBaseTestCase.m in Sources */,
 				A144FAF618C90DD100110B35 /* StagingTests.m in Sources */,
 				A1AE68B519B74F1C00D2C35F /* CoreDataIssues.m in Sources */,
-				A1CEC1A71A35ED58007B4565 /* RealmManager.m in Sources */,
 				A189199E1BB1E8FA0094256E /* LocalizedCat.m in Sources */,
 				A1CEC1AB1A35EE9D007B4565 /* RealmQuerySyncTests.m in Sources */,
 				A1E9797818CBEDFC00E79632 /* ErrorTests.m in Sources */,
@@ -2312,6 +2312,7 @@
 			baseConfigurationReference = 9DF1075E60163430847D0C6C /* Pods-CDA Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/UFO Example.app/UFO Example";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -2349,7 +2350,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.contentful.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2365,6 +2366,7 @@
 			baseConfigurationReference = 7E3192623C89F66471BC426A /* Pods-CDA Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/UFO Example.app/UFO Example";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -2396,7 +2398,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.contentful.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

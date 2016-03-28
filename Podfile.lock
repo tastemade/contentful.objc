@@ -31,31 +31,34 @@ PODS:
   - CCLRequestReplay/Manager (0.9.0)
   - CCLRequestReplay/Record (0.9.0)
   - CCLRequestReplay/Replay (0.9.0)
-  - ContentfulDeliveryAPI (1.9.3):
+  - ContentfulDeliveryAPI (1.9.6):
     - AFNetworking (~> 2.5.3)
     - ISO8601DateFormatter
-  - ContentfulPersistence (0.3.2):
-    - ContentfulDeliveryAPI (~> 1.9.1)
+  - ContentfulPersistence/CoreData (0.5.0):
+    - ContentfulDeliveryAPI (~> 1.9.4)
+  - ContentfulPersistence/Realm (0.5.0):
+    - ContentfulDeliveryAPI (~> 1.9.4)
+    - Realm (~> 0.98.0)
   - FBSnapshotTestCase (1.6)
   - ISO8601DateFormatter (0.7)
   - OCMock (3.2.2)
   - PDKTCollectionViewWaterfallLayout (0.1)
-  - Realm (0.90.6):
-    - Realm/Headers (= 0.90.6)
-  - Realm/Headers (0.90.6)
+  - Realm (0.98.5):
+    - Realm/Headers (= 0.98.5)
+  - Realm/Headers (0.98.5)
   - VCRURLConnection (0.2.0)
 
 DEPENDENCIES:
   - AFNetworking
   - CCLRequestReplay (from `https://github.com/neonichu/CCLRequestReplay.git`)
   - ContentfulDeliveryAPI (from `.`)
-  - ContentfulPersistence
-  - ContentfulPersistence (>= 0.3.2)
+  - ContentfulPersistence/CoreData
+  - ContentfulPersistence/CoreData (>= 0.5.0)
+  - ContentfulPersistence/Realm (>= 0.5.0)
   - FBSnapshotTestCase
   - ISO8601DateFormatter
   - OCMock
   - PDKTCollectionViewWaterfallLayout
-  - Realm
   - VCRURLConnection
 
 EXTERNAL SOURCES:
@@ -72,13 +75,13 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   CCLRequestReplay: a472e52da260c28d7a41df76697b8e518625a44f
-  ContentfulDeliveryAPI: c626f488a9ca53c2f07029593760cdd2c66b9713
-  ContentfulPersistence: fd9ce1235865a968b7c7a57afebf7f235579842d
-  FBSnapshotTestCase: 9d5fe43b29ae3a0ed8fc829477971b281038f748
+  ContentfulDeliveryAPI: 86f1a69dce907032b92e5ec0fbbf3a0dbd49c588
+  ContentfulPersistence: d2ab0ad8082a7b1fc6b8060093e4cb9ffdb5b470
+  FBSnapshotTestCase: 26f32d8fa9eb30e9f09712ecfb097808bc79b898
   ISO8601DateFormatter: ab926648eebe497f4d167c0fd083992f959f1274
   OCMock: 18c9b7e67d4c2770e95bb77a9cc1ae0c91fe3835
   PDKTCollectionViewWaterfallLayout: a246de22e843bdb2677ab2fe5d6c1fb0a623f93e
-  Realm: a4b2766a29006293693a0f26664ecb5a84a54455
+  Realm: db08379969e45cea2edd1c3c0a090fe9e22d2d2f
   VCRURLConnection: accd771ebd4be11183a3e4d5a4403f180a9a235e
 
-COCOAPODS: 0.39.0
+COCOAPODS: 0.38.2
