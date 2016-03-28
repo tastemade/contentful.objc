@@ -6,13 +6,13 @@
 //
 //
 
+#import <ContentfulDeliveryAPI/CDADeletedAsset.h>
+#import <ContentfulDeliveryAPI/CDADeletedEntry.h>
 #import <ContentfulDeliveryAPI/ContentfulDeliveryAPI.h>
 
 #import "CDAArray+Private.h"
 #import "CDAClient+Private.h"
 #import "CDAContentTypeRegistry.h"
-#import "CDADeletedAsset.h"
-#import "CDADeletedEntry.h"
 #import "CDAEntry+Private.h"
 #import "CDAResource+Private.h"
 #import "CDASyncedSpace+Private.h"
@@ -75,11 +75,11 @@
     NSDate* nextTimestamp = self.lastSyncTimestamp;
     
     for (CDAResource* item in array.items) {
-        if ([item isKindOfClass:[CDAAsset class]]) {
+        if (CDAClassIsOfType([item class], CDAAsset.class)) {
             newAssets[item.identifier] = item;
         }
         
-        if ([item isKindOfClass:[CDAEntry class]]) {
+        if (CDAClassIsOfType([item class], CDAEntry.class)) {
             newEntries[item.identifier] = item;
         }
     }
@@ -252,7 +252,7 @@
     NSMutableArray* unresolvedEntries = [@[] mutableCopy];
     
     for (CDAResource* item in array.items) {
-        if ([item isKindOfClass:[CDAEntry class]]) {
+        if (CDAClassIsOfType([item class], CDAEntry.class)) {
             CDAEntry* entry = (CDAEntry*)item;
             [entriesInQuery addObject:item];
             [unresolvedAssets addObjectsFromArray:[entry findUnresolvedAssets]];

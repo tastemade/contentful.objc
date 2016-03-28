@@ -24,6 +24,22 @@
 #define NSUINT_BIT (CHAR_BIT * sizeof(NSUInteger))
 #define NSUINTROTATE(val, howmuch) ((((NSUInteger)val) << howmuch) | (((NSUInteger)val) >> (NSUINT_BIT - howmuch)))
 
+typedef struct typeToClassMap_s {
+    CFStringRef typeName;
+    CFStringRef className;
+} typeToClassMap_t;
+
+static const typeToClassMap_t typeToClassMap[] = {
+    { CFSTR("array"), CFSTR("CDAArray") },
+    { CFSTR("asset"), CFSTR("CDAAsset") },
+    { CFSTR("contenttype"), CFSTR("CDAContentType") },
+    { CFSTR("deletedasset"), CFSTR("CDADeletedAsset") },
+    { CFSTR("deletedentry"), CFSTR("CDADeletedEntry") },
+    { CFSTR("entry"), CFSTR("CDAEntry") },
+    { CFSTR("error"), CFSTR("CDAError") },
+    { CFSTR("space"), CFSTR("CDASpace") },
+};
+
 @interface CDAResource ()
 
 @property (nonatomic, readonly) BOOL isLink;
@@ -36,18 +52,8 @@
 
 @implementation CDAResource
 
-+(BOOL)class:(Class)someClass isEqualToClass:(Class)otherClass {
-    return [NSStringFromClass(someClass.class) isEqualToString:NSStringFromClass(otherClass.class)];
-}
-
 +(BOOL)classIsOfType:(Class)otherClass {
-    do {
-        if ([self class:self isEqualToClass:otherClass]) {
-            return YES;
-        }
-    } while ((otherClass = class_getSuperclass(otherClass)));
-    
-    return NO;
+    return CDAClassIsOfType(otherClass, self.class);
 }
 
 +(nullable instancetype)readFromFile:(NSString*)filePath client:(CDAClient*)client {
@@ -74,21 +80,48 @@
     if (isLink) {
         resourceType = dictionary[@"sys"][@"linkType"];
     }
-    
-    for (Class subclass in [self subclasses]) {
-        // Avoid clashes with custom subclasses the user created
-        if (![NSStringFromClass(subclass) hasPrefix:client.resourceClassPrefix]) {
-            continue;
+
+    if (resourceType == nil) {
+        NSAssert(false, @"No resource type given.");
+        return nil;
+    }
+    resourceType = [resourceType lowercaseString];
+
+    if (client.contentTypeRegistry.hasCustomClasses) {
+        for (Class subclass in [self subclasses]) {
+            // Avoid clashes with custom subclasses the user created
+            if (![NSStringFromClass(subclass) hasPrefix:client.resourceClassPrefix]) {
+                continue;
+            }
+
+            if ([[[subclass CDAType] lowercaseString] isEqualToString:resourceType]) {
+                return [self resourceObjectForSubclass:subclass dictionary:dictionary client:client];
+            }
         }
-        
-        if ([[[subclass CDAType] lowercaseString] isEqualToString:[resourceType lowercaseString]]) {
-            CDAResource* resource = [[subclass alloc] initWithDictionary:dictionary client:client];
-            return resource;
+    } else {
+        size_t const typeCount = sizeof(typeToClassMap) / sizeof(*typeToClassMap);
+        for (size_t i = 0; i < typeCount; i++) {
+            NSString * const name = (__bridge id) typeToClassMap[i].typeName;
+            if ([name isEqualToString:resourceType]) {
+                NSString * const className = (__bridge id) typeToClassMap[i].className;
+                Class const subclass = NSClassFromString(className);
+                return [self resourceObjectForSubclass:subclass dictionary:dictionary client:client];
+            }
         }
     }
     
     NSAssert(false, @"Unsupported resource type '%@'", resourceType);
     return nil;
+}
+
++(instancetype)resourceObjectForSubclass:(Class)subclass
+                              dictionary:(NSDictionary *)dictionary
+                                  client:(CDAClient *)client {
+    CDAResource* resource = [[subclass alloc] initWithDictionary:dictionary client:client];
+    if (!resource.fetched && client.configuration.filterNonExistingResources) {
+        return nil;
+    }
+    return resource;
 }
 
 +(NSArray*)subclasses {

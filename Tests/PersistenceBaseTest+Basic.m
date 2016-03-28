@@ -17,7 +17,7 @@
      The tests are based on a sync session with five subsequent syncs where each one either added,
      removed or updated Resources.
      */
-    NSDictionary* stubs = @{ @"https://cdn.contentful.com/spaces/emh6o2ireilu/sync?initial=true": @"initial", @"https://cdn.contentful.com/spaces/emh6o2ireilu/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdyYxwoHDtsKywrXDmQs_WcOvIcOzwotYw6PCgcOsAcOYYcO4YsKCw7TCnsK_clnClS7Csx9lwoFcw6nCqnnCpWh3w7k7SkI-CcOuQyXDlw_Dlh9RwqkcElwpW30sw4k": @"added", @"https://cdn.contentful.com/spaces/emh6o2ireilu/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdyY0w4bCiMKOWDIFw61bwqQ_w73CnMKsB8KpwrFZPsOZw5ZQwqDDnUA0w5tOPRtwwoAkwpJMTzghdEnDjCkiw5fCuynDlsO5DyvCsjgQa2TDisKNZ8Kqw4TCjhZIGQ": @"deleted", @"https://cdn.contentful.com/spaces/emh6o2ireilu/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdyZew5xDN04dJg3DkmBAw4XDh8OEw5o5UVhIw6nDlFjDoBxIasKIDsKIw4VcIV18GicdwoTDjCtoMiFAfcKiwrRKIsKYwrzCmMKBw4ZhwrdhwrsGa8KTwpQ6w6A": @"added-asset", @"https://cdn.contentful.com/spaces/emh6o2ireilu/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdyZ_NnHDoQzCtcKoMh9KZHtAWcObw7XCimZgVGPChUfDuxQHwoHDosO6CcKodsO2MWJQwrrCrsOswpl5w6LCuV0tw4Njwo9Ww5fCl8KqEgB6XgAJNVF2wpk3Lg": @"deleted-asset", @"https://cdn.contentful.com/spaces/emh6o2ireilu/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdyYHPUPDhggxwr5qw5RBbMKWw4VjOg3DumTDg0_CgsKcYsO8UcOZfMKLw4sKUcOnJcKxfDUkGWwxNMOVw4AiacK5Bmo4ScOhI0g2cXLClxTClsOyE8OOc8O3": @"update", @"https://cdn.contentful.com/spaces/emh6o2ireilu/": @"space", @"https://cdn.contentful.com/spaces/giq5kda3eap4/sync?initial=true": @"932-initial", @"https://cdn.contentful.com/spaces/giq5kda3eap4/": @"932-space", @"https://cdn.contentful.com/spaces/giq5kda3eap4/content_types?limit=1&sys.id%5Bin%5D=1nGOrvlRTaMcyyq4IEa8ea": @"932-content-types", @"https://cdn.contentful.com/spaces/giq5kda3eap4/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdybDqiDCvSIrAFoiw7XDkQrCu8K7N8OkwqlhwoHCscOLM8Knwr7Cp8Ogw7LCjE3DicO8w6cCwoFwO1AVw6B8DGTCtlbDgMKDw7zDicKawrXDqsKkSX7DnMO-ThjDtMORwqHDhk_Ct1o": @"932-add-entry", @"https://cdn.contentful.com/spaces/giq5kda3eap4/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdyY5dsK6w79SE2ADw41bNA58M8KLw5ZzWcKMw5Q-w4Nxw6UzCSTCtQPCrcK5w63CmcKtwq9IwqM6V8OrCsKow6LCisO9K8KfSiEKw5PCnVZQBQfCrsOiwoweCcK0wpvDoQ": @"932-unpublish-entry", @"https://cdn.contentful.com/spaces/giq5kda3eap4/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdybCqx_CocOlwpNuw41raMKrw7nCv8OAwrnCihwDwqnCmUbCjhnDmTojwrZAw7vDuMKCH8Kcw6USTMOqw4NAwo7Cn8KUaVYXwrHCkVLCmsOgNxs-wptWw5LDl8KIw4vCvsOTwq7CsnJJ": @"932-republish-entry" };
+    NSDictionary* stubs = @{ @"https://cdn.contentful.com/spaces/emh6o2ireilu/sync?initial=true": @"initial", @"https://cdn.contentful.com/spaces/emh6o2ireilu/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdyYxwoHDtsKywrXDmQs_WcOvIcOzwotYw6PCgcOsAcOYYcO4YsKCw7TCnsK_clnClS7Csx9lwoFcw6nCqnnCpWh3w7k7SkI-CcOuQyXDlw_Dlh9RwqkcElwpW30sw4k": @"added", @"https://cdn.contentful.com/spaces/emh6o2ireilu/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdyY0w4bCiMKOWDIFw61bwqQ_w73CnMKsB8KpwrFZPsOZw5ZQwqDDnUA0w5tOPRtwwoAkwpJMTzghdEnDjCkiw5fCuynDlsO5DyvCsjgQa2TDisKNZ8Kqw4TCjhZIGQ": @"deleted", @"https://cdn.contentful.com/spaces/emh6o2ireilu/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdyZew5xDN04dJg3DkmBAw4XDh8OEw5o5UVhIw6nDlFjDoBxIasKIDsKIw4VcIV18GicdwoTDjCtoMiFAfcKiwrRKIsKYwrzCmMKBw4ZhwrdhwrsGa8KTwpQ6w6A": @"added-asset", @"https://cdn.contentful.com/spaces/emh6o2ireilu/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdyZ_NnHDoQzCtcKoMh9KZHtAWcObw7XCimZgVGPChUfDuxQHwoHDosO6CcKodsO2MWJQwrrCrsOswpl5w6LCuV0tw4Njwo9Ww5fCl8KqEgB6XgAJNVF2wpk3Lg": @"deleted-asset", @"https://cdn.contentful.com/spaces/emh6o2ireilu/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdyYHPUPDhggxwr5qw5RBbMKWw4VjOg3DumTDg0_CgsKcYsO8UcOZfMKLw4sKUcOnJcKxfDUkGWwxNMOVw4AiacK5Bmo4ScOhI0g2cXLClxTClsOyE8OOc8O3": @"update", @"https://cdn.contentful.com/spaces/emh6o2ireilu/": @"space", @"https://cdn.contentful.com/spaces/emh6o2ireilu/content_types": @"all-content-types", @"https://cdn.contentful.com/spaces/giq5kda3eap4/sync?initial=true": @"932-initial", @"https://cdn.contentful.com/spaces/giq5kda3eap4/": @"932-space", @"https://cdn.contentful.com/spaces/giq5kda3eap4/content_types?limit=1&sys.id%5Bin%5D=1nGOrvlRTaMcyyq4IEa8ea": @"932-content-types", @"https://cdn.contentful.com/spaces/giq5kda3eap4/": @"932-space", @"https://cdn.contentful.com/spaces/giq5kda3eap4/content_types": @"932-all-content-types", @"https://cdn.contentful.com/spaces/giq5kda3eap4/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdybDqiDCvSIrAFoiw7XDkQrCu8K7N8OkwqlhwoHCscOLM8Knwr7Cp8Ogw7LCjE3DicO8w6cCwoFwO1AVw6B8DGTCtlbDgMKDw7zDicKawrXDqsKkSX7DnMO-ThjDtMORwqHDhk_Ct1o": @"932-add-entry", @"https://cdn.contentful.com/spaces/giq5kda3eap4/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdyY5dsK6w79SE2ADw41bNA58M8KLw5ZzWcKMw5Q-w4Nxw6UzCSTCtQPCrcK5w63CmcKtwq9IwqM6V8OrCsKow6LCisO9K8KfSiEKw5PCnVZQBQfCrsOiwoweCcK0wpvDoQ": @"932-unpublish-entry", @"https://cdn.contentful.com/spaces/giq5kda3eap4/sync?sync_token=w5ZGw6JFwqZmVcKsE8Kow4grw45QdybCqx_CocOlwpNuw41raMKrw7nCv8OAwrnCihwDwqnCmUbCjhnDmTojwrZAw7vDuMKCH8Kcw6USTMOqw4NAwo7Cn8KUaVYXwrHCkVLCmsOgNxs-wptWw5LDl8KIw4vCvsOTwq7CsnJJ": @"932-republish-entry" };
 
     [self stubHTTPRequestUsingFixtures:stubs inDirectory:@"SyncTests"];
 }
@@ -29,6 +29,7 @@
         [self assertNumberOfAssets:1U numberOfEntries:1U];
         [self buildPersistenceManagerWithDefaultClient:NO];
 
+        [self.persistenceManager performBlock:^{ // Since we are switching managers here
         id<CDAPersistedAsset> asset = [[self.persistenceManager fetchAssetsFromDataStore] firstObject];
         XCTAssertEqualObjects(@"512_black.png", asset.url.lastPathComponent, @"");
         id cat = [[self.persistenceManager fetchEntriesFromDataStore] firstObject];
@@ -85,7 +86,7 @@
             XCTFail(@"Error: %@", error);
 
             EndBlock();
-        }];
+        }]; }];
     } failure:^(CDAResponse *response, NSError *error) {
         XCTFail(@"Error: %@", error);
 
@@ -216,15 +217,17 @@
     [self.persistenceManager performSynchronizationWithSuccess:^{
         [self buildPersistenceManagerWithDefaultClient:YES];
 
-        XCTAssertEqual(4U, [self.persistenceManager fetchAssetsFromDataStore].count, @"");
-        XCTAssertEqual(3U, [self.persistenceManager fetchEntriesFromDataStore].count, @"");
+        [self.persistenceManager performBlock:^{ // we are using a different manager here
+            XCTAssertEqual(4U, [self.persistenceManager fetchAssetsFromDataStore].count, @"");
+            XCTAssertEqual(3U, [self.persistenceManager fetchEntriesFromDataStore].count, @"");
 
-        id nyanCat = [self.persistenceManager fetchEntryWithIdentifier:@"nyancat"];
-        XCTAssertNotNil(nyanCat, @"");
-        XCTAssertNotNil([nyanCat picture], @"");
-        XCTAssertNotNil([nyanCat picture].url, @"");
-
-        EndBlock();
+            id nyanCat = [self.persistenceManager fetchEntryWithIdentifier:@"nyancat"];
+            XCTAssertNotNil(nyanCat, @"");
+            XCTAssertNotNil([nyanCat picture], @"");
+            XCTAssertNotNil([nyanCat picture].url, @"");
+            
+            EndBlock();
+        }];
     } failure:^(CDAResponse *response, NSError *error) {
         XCTFail(@"Error: %@", error);
 
@@ -281,6 +284,26 @@
     WaitUntilBlockCompletes();
 }
 
+-(void)assertCachedImageWithData:(NSData*)data {
+    id<CDAPersistedAsset> asset = [[[self.persistenceManager fetchAssetsFromDataStore] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"identifier == 'nyancat'"]] firstObject];
+    
+    CDAClient* client = [self.persistenceManager client];
+    XCTAssertNotNil(client, @"");
+    NSData* cachedData = [CDAAsset cachedDataForPersistedAsset:asset client:client];
+
+    UIImage* cachedImage = [UIImage imageWithData:cachedData];
+    XCTAssertNotNil(cachedImage, @"");
+    XCTAssertEqual(asset.width.floatValue, cachedImage.size.width, @"");
+    XCTAssertEqual(asset.height.floatValue, cachedImage.size.height, @"");
+
+    UIImage* refImage = [UIImage imageWithData:data];
+    NSError* error;
+    BOOL result = [self.snapshotTestController compareReferenceImage:refImage
+                                                             toImage:cachedImage
+                                                               error:&error];
+    XCTAssertTrue(result, @"Error: %@", error);
+}
+
 -(void)basic_imageCaching {
     [self removeAllStubs];
     [self buildPersistenceManagerWithDefaultClient:YES];
@@ -290,34 +313,22 @@
     [self.persistenceManager performSynchronizationWithSuccess:^{
         __block id<CDAPersistedAsset> asset = [[[self.persistenceManager fetchAssetsFromDataStore] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"identifier == 'nyancat'"]] firstObject];
         XCTAssertNotNil(asset, @"");
+        NSString* url = asset.url;
 
         [CDAAsset cachePersistedAsset:asset
                                client:self.persistenceManager.client
                      forcingOverwrite:YES
                     completionHandler:^(BOOL success) {
-                        NSURLRequest* assetRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:asset.url]];
+                        NSURLRequest* assetRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
                         [NSURLConnection sendAsynchronousRequest:assetRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
                             XCTAssertNotNil(data, @"Error: %@", connectionError);
 
                             [self buildPersistenceManagerWithDefaultClient:YES];
-                            CDAClient* client = [self.persistenceManager client];
-                            asset = [[[self.persistenceManager fetchAssetsFromDataStore] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"identifier == 'nyancat'"]] firstObject];
+                            [self.persistenceManager performBlock:^{ // we are on another context here
+                                [self assertCachedImageWithData:data];
 
-                            NSData* cachedData = [CDAAsset cachedDataForPersistedAsset:asset
-                                                                                client:client];
-                            UIImage* cachedImage = [UIImage imageWithData:cachedData];
-                            XCTAssertNotNil(cachedImage, @"");
-                            XCTAssertEqual(asset.width.floatValue, cachedImage.size.width, @"");
-                            XCTAssertEqual(asset.height.floatValue, cachedImage.size.height, @"");
-
-                            UIImage* refImage = [UIImage imageWithData:data];
-                            NSError* error;
-                            BOOL result = [self.snapshotTestController compareReferenceImage:refImage
-                                                                                     toImage:cachedImage
-                                                                                       error:&error];
-                            XCTAssertTrue(result, @"Error: %@", error);
-
-                            EndBlock();
+                                EndBlock();
+                            }];
                         }];
                     }];
     } failure:^(CDAResponse *response, NSError *error) {

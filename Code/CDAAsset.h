@@ -7,10 +7,10 @@
 //
 
 @import CoreGraphics;
+#import <ContentfulDeliveryAPI/CDAEntry.h>
 
 #import <ContentfulDeliveryAPI/CDANullabilityStubs.h>
 
-#import "CDAEntry.h"
 #import "CDAPersistedAsset.h"
 
 /** Pass this constant as image quality to not modify the quality. */

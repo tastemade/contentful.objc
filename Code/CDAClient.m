@@ -7,18 +7,19 @@
 //
 
 #import <ContentfulDeliveryAPI/CDAAsset.h>
+#import <ContentfulDeliveryAPI/CDAContentType.h>
 #import <ContentfulDeliveryAPI/CDAEntry.h>
 #import <ContentfulDeliveryAPI/CDASpace.h>
 
 #import "CDAArray+Private.h"
 #import "CDAClient+Private.h"
 #import "CDAConfiguration+Private.h"
-#import "CDAContentType.h"
 #import "CDAContentTypeRegistry.h"
 #import "CDAError+Private.h"
 #import "CDARequestOperationManager.h"
 #import "CDAResource+Private.h"
 #import "CDASyncedSpace+Private.h"
+#import "CDAUtilities.h"
 
 static NSString* const CDAAllowPreviewModeInProductionKey = @"CDAAllowPreviewModeInProduction";
 
@@ -54,6 +55,7 @@ NSString* const CMAContentTypeHeader = @"application/vnd.contentful.management.v
     CDAClient* client = [[[self class] alloc] initWithSpaceKey:space.identifier
                                                    accessToken:self.accessToken
                                                  configuration:self.configuration];
+    client.contentTypeRegistry = [self.contentTypeRegistry copy];
     client.resourceClassPrefix = self.resourceClassPrefix;
     client.space = space;
     return client;
@@ -259,11 +261,11 @@ NSString* const CMAContentTypeHeader = @"application/vnd.contentful.management.v
     
     NSMutableDictionary* query = [array.query mutableCopy];
     query[@"skip"] = @(array.skip + array.limit);
-    
-    if ([[array.items firstObject] isKindOfClass:[CDAAsset class]]) {
+
+    if (CDAClassIsOfType([[array.items firstObject] class], CDAAsset.class)) {
         return [self fetchAssetsMatching:query success:success failure:failure];
     } else {
-        NSAssert([[array.items firstObject] isKindOfClass:[CDAEntry class]],
+        NSAssert(CDAClassIsOfType([[array.items firstObject]  class], CDAEntry.class),
                  @"Array need to contain either assets or entries.");
         return [self fetchEntriesMatching:query success:success failure:failure];
     }
@@ -326,11 +328,11 @@ NSString* const CMAContentTypeHeader = @"application/vnd.contentful.management.v
         NSMutableDictionary* entries = [@{} mutableCopy];
         
         for (CDAResource* resource in array.items) {
-            if ([resource isKindOfClass:[CDAAsset class]]) {
+            if (CDAClassIsOfType([resource class], CDAAsset.class)) {
                 assets[resource.identifier] = resource;
             }
             
-            if ([resource isKindOfClass:[CDAEntry class]]) {
+            if (CDAClassIsOfType([resource class], CDAEntry.class)) {
                 entries[resource.identifier] = resource;
             }
         }
@@ -475,7 +477,7 @@ NSString* const CMAContentTypeHeader = @"application/vnd.contentful.management.v
 -(void)resolveLinksFromArray:(NSArray*)array
                      success:(void (^)(NSArray* items))success
                      failure:(CDARequestFailureBlock)failure {
-    if (![[array firstObject] isKindOfClass:[CDAResource class]]) {
+    if (!CDAClassIsOfType([[array firstObject] class], CDAResource.class)) {
         if (success) {
             success(array);
         }

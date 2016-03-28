@@ -10,7 +10,9 @@
 
 @class CDAContentType;
 
-@interface CDAContentTypeRegistry : NSObject
+@interface CDAContentTypeRegistry : NSObject <NSCopying>
+
+@property (nonatomic, readonly) BOOL hasCustomClasses;
 
 -(void)addContentType:(CDAContentType*)contentType;
 -(CDAContentType*)contentTypeForIdentifier:(NSString*)identifier;

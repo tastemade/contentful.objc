@@ -6,11 +6,17 @@
 //
 //
 
+#if __has_feature(modules)
 @import Foundation;
+#else
+#import <Foundation/Foundation.h>
+#endif
 
 #import <ContentfulDeliveryAPI/CDANullabilityStubs.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+extern const NSString* const CDA_DEFAULT_SERVER;
 
 /**
  Class representing additional configuration options for a `CDAClient`.
@@ -27,6 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 +(instancetype)defaultConfiguration;
 
 /** @name Configuring parameters */
+
+/** Automatically filter any non-existing resources being linked to. */
+@property (nonatomic) BOOL filterNonExistingResources;
 
 /** Automatically retry requests if rate-limits are exceeded. */
 @property (nonatomic) BOOL rateLimiting;

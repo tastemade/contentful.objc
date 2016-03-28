@@ -6,7 +6,8 @@
 //
 //
 
-#import "CDAContentType.h"
+#import <ContentfulDeliveryAPI/CDAContentType.h>
+
 #import "CDAContentTypeRegistry.h"
 
 @interface CDAContentTypeRegistry ()
@@ -31,8 +32,19 @@
     return self.contentTypes[identifier];
 }
 
+-(id)copyWithZone:(NSZone *)zone {
+    CDAContentTypeRegistry* copy = [[[self class] allocWithZone:zone] init];
+    copy.contentTypes = self.contentTypes;
+    copy.customClasses = self.customClasses;
+    return copy;
+}
+
 -(Class)customClassForContentType:(CDAContentType *)contentType {
     return self.customClasses[contentType.identifier];
+}
+
+-(BOOL)hasCustomClasses {
+    return self.customClasses.count > 0;
 }
 
 -(id)init {

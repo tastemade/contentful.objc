@@ -67,6 +67,7 @@ NSString* CDACacheFileNameForResource(CDAResource* resource) {
 NSArray* CDAClassGetSubclasses(Class parentClass) {
     int numClasses = objc_getClassList(NULL, 0);
     Class* classes = NULL;
+    static const Class invalidClass =  (__bridge Class) (void*) (((intptr_t) 0)-1);
     
     classes = (__unsafe_unretained Class*)malloc(sizeof(Class) * numClasses);
     numClasses = objc_getClassList(classes, numClasses);
@@ -76,9 +77,9 @@ NSArray* CDAClassGetSubclasses(Class parentClass) {
         Class superClass = classes[i];
         do {
             superClass = class_getSuperclass(superClass);
-        } while(superClass && superClass != parentClass);
+        } while(superClass && (superClass != parentClass) && (superClass != invalidClass));
         
-        if (superClass == nil) {
+        if ((superClass == nil) || (superClass == invalidClass)) {
             continue;
         }
         
@@ -87,6 +88,20 @@ NSArray* CDAClassGetSubclasses(Class parentClass) {
     
     free(classes);
     return result;
+}
+
+BOOL CDAClassIsEqualToClass(Class someClass, Class otherClass) {
+    return [NSStringFromClass(someClass) isEqualToString:NSStringFromClass(otherClass)];
+}
+
+BOOL CDAClassIsOfType(Class someClass, Class otherClass) {
+    do {
+        if (CDAClassIsEqualToClass(someClass, otherClass)) {
+            return YES;
+        }
+    } while ((someClass = class_getSuperclass(someClass)));
+
+    return NO;
 }
 
 void CDADecodeObjectWithCoder(id object, NSCoder* aDecoder) {

@@ -3,8 +3,8 @@
 [![Version](https://img.shields.io/cocoapods/v/ContentfulDeliveryAPI.svg?style=flat)](http://cocoadocs.org/docsets/ContentfulDeliveryAPI)
 [![License](https://img.shields.io/cocoapods/l/ContentfulDeliveryAPI.svg?style=flat)](http://cocoadocs.org/docsets/ContentfulDeliveryAPI)
 [![Platform](https://img.shields.io/cocoapods/p/ContentfulDeliveryAPI.svg?style=flat)](http://cocoadocs.org/docsets/ContentfulDeliveryAPI)
-[![Build Status](http://img.shields.io/travis/contentful/contentful.objc/master.svg?style=flat)](https://travis-ci.org/contentful/contentful.objc)
-[![Coverage Status](https://img.shields.io/coveralls/contentful/contentful.objc.svg)](https://coveralls.io/r/contentful/contentful.objc?branch=master)
+[![Build Status](https://img.shields.io/travis/contentful/contentful.objc/master.svg?style=flat)](https://travis-ci.org/contentful/contentful.objc)
+[![Coverage Status](https://img.shields.io/coveralls/contentful/contentful.objc.svg)](https://coveralls.io/github/contentful/contentful.objc)
 
 Objective-C SDK for [Contentful's][1] Content Delivery API.
 
@@ -65,7 +65,7 @@ CDAEntry* readEntry = [CDAEntry readFromFile:@"/some/path" client:client];
 
 Most of the UIKit extensions have an `offlineCaching` property which transparently uses this mechanism for showing content when offline.
 
-If you rather use another solution, there is the abstract `CDAPersistenceManager` class with a [sample implementation](https://github.com/contentful/contentful.objc/blob/master/Code/CoreData/CoreDataManager.m) for Core Data. It supports mapping Resources to another method for managing your object graph easily and ties this to the Contentful synchronization API. Check out the Core Data example app for integrating it yourself.
+If you rather use another solution, there is the abstract `CDAPersistenceManager` class with a [sample implementation](https://github.com/contentful/contentful-persistence.objc/blob/master/Code/CoreDataManager.m) for Core Data. It supports mapping Resources to another method for managing your object graph easily and ties this to the Contentful synchronization API. Check out the Core Data example app for integrating it yourself.
 
 In both cases, you can use the `offlineCaching_cda` property of the SDK's `UIImageView` category to make any image view transparently cache its contents in a flat file on disk. This will only cache images that the user has viewed once while the app was online.
 
@@ -156,12 +156,12 @@ Copyright (c) 2014, 2015 Contentful GmbH. See LICENSE for further details.
 
 
 [1]: https://www.contentful.com
-[2]: http://www.cocoapods.org
-[3]: http://www.afnetworking.com
+[2]: https://cocoapods.org/
+[3]: https://github.com/AFNetworking/AFNetworking
 [4]: http://boredzo.org/iso8601dateformatter/
 [5]: http://git-scm.com/docs/git-submodule
-[6]: https://www.contentful.com/developers/documentation/content-delivery-api/
-[7]: http://cocoadocs.org/docsets/ContentfulDeliveryAPI/1.8.0/
-[8]: http://static.contentful.com/downloads/iOS/ContentfulDeliveryAPI-1.8.0.zip
+[6]: http://docs.contentfulcda.apiary.io/
+[7]: http://cocoadocs.org/docsets/ContentfulDeliveryAPI/1.9.6/
+[8]: http://static.contentful.com/downloads/iOS/ContentfulDeliveryAPI-1.9.6.zip
 [9]: http://static.contentful.com/downloads/iOS/UFO.zip
-[11]: https://www.contentful.com/blog/2014/04/04/Contentful-iOS-SDK/
+[11]: https://www.contentful.com/blog/2014/04/04/contentful-ios-sdk/
