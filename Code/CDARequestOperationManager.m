@@ -6,7 +6,7 @@
 //
 //
 
-#import <ContentfulDeliveryAPI/CDATargetConditionals.h>
+@import Darwin.TargetConditionals;
 
 #if TARGET_OS_IOS
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>

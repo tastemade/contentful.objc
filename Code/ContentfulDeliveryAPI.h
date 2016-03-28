@@ -25,7 +25,6 @@
 #import <ContentfulDeliveryAPI/CDAResponse.h>
 #import <ContentfulDeliveryAPI/CDASpace.h>
 #import <ContentfulDeliveryAPI/CDASyncedSpace.h>
-#import <ContentfulDeliveryAPI/CDATargetConditionals.h>
 
 #if TARGET_OS_IOS
 #import <ContentfulDeliveryAPI/CDAEntriesViewController.h>
