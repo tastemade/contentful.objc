@@ -142,7 +142,7 @@ static NSCache* cache = nil;
                                [self cda_handleCachingForAsset:asset];
                                
                                if (completion) {
-                                   completion(image);
+                                   completion(asset, image);
                                }
                            }];
 }

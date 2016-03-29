@@ -15,7 +15,7 @@
 #import <ContentfulDeliveryAPI/CDAPersistedAsset.h>
 #import "CDAAsset.h"
 
-typedef void(^CDAImageCompletionBlock)(UIImage * __nullable image);
+typedef void(^CDAImageCompletionBlock)(CDAAsset * __nonnull, UIImage * __nullable image);
 
 /**
  Convenience category on `UIImageView` which allows asynchronously setting its image from a given
