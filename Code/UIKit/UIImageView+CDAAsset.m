@@ -256,20 +256,21 @@ static NSCache* cache = nil;
         }
         self.requestURL_cda = nil;
         
-        [self hideActivityIndicator];
-        
-        if (!data) {
-            NSLog(@"Error while request '%@': %@", response.URL, error);
-            return;
-        }
-        
-        UIImage *image = [UIImage imageWithData:data];
-        [self cda_handleCachingForAsset:asset];
-        
-        if (completion) {
-            completion(asset, image);
-        }
-
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self hideActivityIndicator];
+            
+            if (!data) {
+                NSLog(@"Error while request '%@': %@", response.URL, error);
+                return;
+            }
+            
+            UIImage *image = [UIImage imageWithData:data];
+            [self cda_handleCachingForAsset:asset];
+            
+            if (completion) {
+                completion(asset, image);
+            }
+        }];
     }];
     [dataTask resume];
     
