@@ -238,6 +238,41 @@ static NSCache* cache = nil;
     [self cda_setImageWithAsset:asset URL:[asset imageURLWithSize:size quality:quality format:format] size:size placeholderImage:placeholderImage completion:completion];
 }
 
+- (void)cda_loadImageWithAsset:(CDAAsset * __nonnull)asset
+                          size:(CGSize)size
+                       quality:(CGFloat)quality
+                        format:(CDAImageFormat)format
+                    completion:(CDAImageCompletionBlock __nullable)completion
+{
+    NSURL *URL = [asset imageURLWithSize:size quality:quality format:format];
+    
+    [self showActivityIndicatorIfNeeded];
+    
+    self.requestURL_cda = URL;
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:URL]
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if (![self.requestURL_cda isEqual:response.URL]) {
+                                   return;
+                               }
+                               self.requestURL_cda = nil;
+                               
+                               [self hideActivityIndicator];
+                               
+                               if (!data) {
+                                   NSLog(@"Error while request '%@': %@", response.URL, error);
+                                   return;
+                               }
+                               
+                               UIImage *image = [UIImage imageWithData:data];
+                               [self cda_handleCachingForAsset:asset];
+                               
+                               if (completion) {
+                                   completion(asset, image);
+                               }
+                           }];
+}
+
 -(void)cda_validateAsset:(CDAAsset *)asset {
     if (asset && !asset.isImage) {
         [NSException raise:NSInvalidArgumentException
