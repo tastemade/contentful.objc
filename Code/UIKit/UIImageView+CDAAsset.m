@@ -238,7 +238,7 @@ static NSCache* cache = nil;
     [self cda_setImageWithAsset:asset URL:[asset imageURLWithSize:size quality:quality format:format] size:size placeholderImage:placeholderImage completion:completion];
 }
 
-- (void)cda_loadImageWithAsset:(CDAAsset * __nonnull)asset
+- (NSURLSessionDataTask * __nonnull)cda_loadImageWithAsset:(CDAAsset * __nonnull)asset
                           size:(CGSize)size
                        quality:(CGFloat)quality
                         format:(CDAImageFormat)format
@@ -249,28 +249,31 @@ static NSCache* cache = nil;
     [self showActivityIndicatorIfNeeded];
     
     self.requestURL_cda = URL;
-    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:URL]
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               if (![self.requestURL_cda isEqual:response.URL]) {
-                                   return;
-                               }
-                               self.requestURL_cda = nil;
-                               
-                               [self hideActivityIndicator];
-                               
-                               if (!data) {
-                                   NSLog(@"Error while request '%@': %@", response.URL, error);
-                                   return;
-                               }
-                               
-                               UIImage *image = [UIImage imageWithData:data];
-                               [self cda_handleCachingForAsset:asset];
-                               
-                               if (completion) {
-                                   completion(asset, image);
-                               }
-                           }];
+    
+    NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:[NSURLRequest requestWithURL:URL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (![self.requestURL_cda isEqual:response.URL]) {
+            return;
+        }
+        self.requestURL_cda = nil;
+        
+        [self hideActivityIndicator];
+        
+        if (!data) {
+            NSLog(@"Error while request '%@': %@", response.URL, error);
+            return;
+        }
+        
+        UIImage *image = [UIImage imageWithData:data];
+        [self cda_handleCachingForAsset:asset];
+        
+        if (completion) {
+            completion(asset, image);
+        }
+
+    }];
+    [dataTask resume];
+    
+    return dataTask;
 }
 
 -(void)cda_validateAsset:(CDAAsset *)asset {

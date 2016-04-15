@@ -122,10 +122,9 @@ typedef void(^CDAImageCompletionBlock)(CDAAsset * __nonnull, UIImage * __nullabl
  *  @param size             The desired size of the image. It will be resized by the server.
  *  @param quality          The desired quality of the image.
  *  @param format           The desired image format.
- *  @param placeholderImage An alternative image which will be displayed until `asset` is loaded.
  *  @exception NSIllegalArgumentException If the Asset is pointing to an image.
  */
-- (void)cda_loadImageWithAsset:(CDAAsset * __nonnull)asset size:(CGSize)size quality:(CGFloat)quality format:(CDAImageFormat)format completion:(CDAImageCompletionBlock __nullable)completion;
+- (NSURLSessionDataTask * __nonnull)cda_loadImageWithAsset:(CDAAsset * __nonnull)asset size:(CGSize)size quality:(CGFloat)quality format:(CDAImageFormat)format completion:(CDAImageCompletionBlock __nullable)completion;
 
 /**
  *  Set this image view's image to the image file retrieved from the given Asset.
