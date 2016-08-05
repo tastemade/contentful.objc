@@ -252,6 +252,9 @@ static NSCache* cache = nil;
     
     NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:[NSURLRequest requestWithURL:URL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (![self.requestURL_cda isEqual:response.URL]) {
+            if (completion) {
+                completion(asset, nil)
+            }
             return;
         }
         self.requestURL_cda = nil;
@@ -261,6 +264,9 @@ static NSCache* cache = nil;
             
             if (!data) {
                 NSLog(@"Error while request '%@': %@", response.URL, error);
+                if (completion) {
+                    completion(asset, nil)
+                }
                 return;
             }
             
