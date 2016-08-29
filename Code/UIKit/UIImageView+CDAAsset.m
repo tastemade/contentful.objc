@@ -248,10 +248,14 @@ static NSCache* cache = nil;
     
     self.requestURL_cda = URL;
     
+    [self showActivityIndicatorIfNeeded];
+    
     NSURLSessionDataTask *dataTask = [[NSURLSession sharedSession] dataTaskWithRequest:[NSURLRequest requestWithURL:URL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (![self.requestURL_cda isEqual:response.URL]) {
             if (completion) {
-                completion(asset, nil);
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    completion(asset, nil);
+                }];
             }
             return;
         }
@@ -260,17 +264,23 @@ static NSCache* cache = nil;
         if (!data) {
             NSLog(@"Error while request '%@': %@", response.URL, error);
             if (completion) {
-                completion(asset, nil);
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    completion(asset, nil);
+                }];
             }
             return;
         }
         
-        UIImage *image = [UIImage imageWithData:data];
-        [self cda_handleCachingForAsset:asset];
-        
-        if (completion) {
-            completion(asset, image);
-        }
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self hideActivityIndicator];
+            
+            UIImage *image = [UIImage imageWithData:data];
+            [self cda_handleCachingForAsset:asset];
+            
+            if (completion) {
+                completion(asset, image);
+            }
+        }]
     }];
     [dataTask resume];
     
