@@ -280,7 +280,7 @@ static NSCache* cache = nil;
             if (completion) {
                 completion(asset, image);
             }
-        }]
+        }];
     }];
     [dataTask resume];
     
